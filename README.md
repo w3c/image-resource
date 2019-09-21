@@ -15,7 +15,7 @@ cover how to extract `ImageResource` into its own spec, and migrate specs using 
 The new definition of `ImageResource` will only keep the generic members.
 
 ```webidl
-dictionary ImageResouce {
+dictionary ImageResource {
   required USVString src;
   DOMString sizes;
   DOMString type;  

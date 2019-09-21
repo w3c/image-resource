@@ -22,6 +22,20 @@ dictionary ImageResouce {
 }
 ```
 
+## Scope
+
+The spec will include the IDL and the algorithms to parse the fields. However, the spec will not include:
+
+* Fetching the image
+
+  There are application-specific fields needed to create an appropriate request, such as `client`,
+  `service-worker mode`, among others.
+
+* Choosing an appropriate `ImageResource`
+
+  This is also application specific, where different applications operate under different constraints. Furthermore,
+  this should be a user agent decision.
+
 ## Migration
 
 `ImageResource` is defined as a dictionary, and is therefore not web-exposed. Moving things around will not cause

@@ -1,0 +1,17 @@
+<pre class='metadata'>
+Title: Image Resouce
+Shortname: image-resource
+Level: 1
+Status: ED
+Group: wicg
+URL: https://rayankans.github.io/image-resource/
+Editor: Aaron Gustafson, Microsoft, aarongu@microsoft.com
+Editor: Rayan Kanso, Google, rayankans@google.com
+Abstract: Image Resource
+</pre>
+
+Introduction {#intro}
+=====================
+
+Introduction here.
+

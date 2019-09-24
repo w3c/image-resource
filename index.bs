@@ -28,7 +28,7 @@ Introduction {#intro}
 =====================
 
 Web applications often accept developer-provided image resources to be displayed. This specification defines a
-generalized structure where developer can provide additional metadata about an image. The user agent can then use
+generalized structure where developers can provide additional metadata about an image. The user agent can then use
 this extra information to choose an image that is best suited to display on the end-user's device or most closely
 matches the end-user's preferences.
 
@@ -40,14 +40,16 @@ matches the end-user's preferences.
 dictionary ImageResource {
   required USVString src;
   DOMString sizes;
-  DOMString type;  
+  USVString type;  
 };
 </script>
 
 ## {{ImageResource/src}} ## {#image-resource-src}
 
-The {{ImageResource/src}} of an {{ImageResource}} is a [=string=] from which a user agent can create a {{/URL}} to
-[=/fetch=] the image's data.
+The {{ImageResource/src}} of an {{ImageResource}} is a [=string=] from which a user agent can create a [=request=]'s
+[=/URL=] to [=/fetch=] the image's data.
+
+Note: The other members of the [=request=] depend on the API using {{ImageResource}}.
 
 ## {{ImageResource/sizes}} ## {#image-resource-sizes}
 

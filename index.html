@@ -1213,9 +1213,9 @@ Possible extra rowspan handling
 	}
 </style>
   <link href="https://www.w3.org/StyleSheets/TR/2016/W3C-ED" rel="stylesheet">
-  <meta content="Bikeshed version cb5a17652cb33dffd20b8b6a876bb811c1f749a9" name="generator">
+  <meta content="Bikeshed version 450e0499b28bb4c684052ad936ad1e7d36c4eac5" name="generator">
   <link href="https://rayankans.github.io/image-resource/" rel="canonical">
-  <meta content="65016b24b99b8ac2e5dd5eb71dc61caae2e4427d" name="document-revision">
+  <meta content="1bd39728e9e523c3c22cee58e5dbd620ae84d379" name="document-revision">
 <style>/* style-md-lists */
 
 /* This is a weird hack for me not yet following the commonmark spec
@@ -1473,11 +1473,13 @@ c-[il] { color: #000000 } /* Literal.Number.Integer.Long */
   <div class="head">
    <p data-fill-with="logo"></p>
    <h1 class="p-name no-ref" id="title">Image Resouce</h1>
-   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-09-21">21 September 2019</time></span></h2>
+   <h2 class="no-num no-toc no-ref heading settled" id="subtitle"><span class="content">Editor’s Draft, <time class="dt-updated" datetime="2019-09-24">24 September 2019</time></span></h2>
    <div data-fill-with="spec-metadata">
     <dl>
      <dt>This version:
      <dd><a class="u-url" href="https://rayankans.github.io/image-resource/">https://rayankans.github.io/image-resource/</a>
+     <dt>Issue Tracking:
+     <dd><a href="https://github.com/rayankans/image-resource/issues/">GitHub</a>
      <dt class="editor">Editors:
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:aarongu@microsoft.com">Aaron Gustafson</a> (<span class="p-org org">Microsoft</span>)
      <dd class="editor p-author h-card vcard"><a class="p-name fn u-email email" href="mailto:rayankans@google.com">Rayan Kanso</a> (<span class="p-org org">Google</span>)
@@ -1533,24 +1535,25 @@ A human-readable <a href="http://www.w3.org/community/about/agreements/cla-deed/
   <main>
    <h2 class="heading settled" data-level="1" id="intro"><span class="secno">1. </span><span class="content">Introduction</span><a class="self-link" href="#intro"></a></h2>
    <p>Web applications often accept developer-provided image resources to be displayed. This specification defines a
-generalized structure where developer can provide additional metadata about an image. The user agent can then use
+generalized structure where developers can provide additional metadata about an image. The user agent can then use
 this extra information to choose an image that is best suited to display on the end-user’s device or most closely
 matches the end-user’s preferences.</p>
    <h2 class="heading settled" data-level="2" id="image-resource"><span class="secno">2. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#dictdef-imageresource" id="ref-for-dictdef-imageresource">ImageResource</a></code> and its members</span><a class="self-link" href="#image-resource"></a></h2>
 <pre class="idl highlight def"><c- b>dictionary</c-> <dfn class="dfn-paneled idl-code" data-dfn-type="dictionary" data-export id="dictdef-imageresource"><code><c- g>ImageResource</c-></code></dfn> {
   <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString"><c- b>USVString</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="ImageResource" data-dfn-type="dict-member" data-export data-type="USVString " id="dom-imageresource-src"><code><c- g>src</c-></code></dfn>;
   <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString"><c- b>DOMString</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="ImageResource" data-dfn-type="dict-member" data-export data-type="DOMString " id="dom-imageresource-sizes"><code><c- g>sizes</c-></code></dfn>;
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①"><c- b>DOMString</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="ImageResource" data-dfn-type="dict-member" data-export data-type="DOMString " id="dom-imageresource-type"><code><c- g>type</c-></code></dfn>;  
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString①"><c- b>USVString</c-></a> <dfn class="dfn-paneled idl-code" data-dfn-for="ImageResource" data-dfn-type="dict-member" data-export data-type="USVString " id="dom-imageresource-type"><code><c- g>type</c-></code></dfn>;  
 };
 </pre>
    <h3 class="heading settled" data-level="2.1" id="image-resource-src"><span class="secno">2.1. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#dom-imageresource-src" id="ref-for-dom-imageresource-src">src</a></code></span><a class="self-link" href="#image-resource-src"></a></h3>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-imageresource-src" id="ref-for-dom-imageresource-src①">src</a></code> of an <code class="idl"><a data-link-type="idl" href="#dictdef-imageresource" id="ref-for-dictdef-imageresource①">ImageResource</a></code> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string" id="ref-for-string">string</a> from which a user agent can create a <code class="idl"><a data-link-type="idl" href="https://url.spec.whatwg.org/#url" id="ref-for-url">URL</a></code> to <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch" id="ref-for-concept-fetch">fetch</a> the image’s data.</p>
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-imageresource-src" id="ref-for-dom-imageresource-src①">src</a></code> of an <code class="idl"><a data-link-type="idl" href="#dictdef-imageresource" id="ref-for-dictdef-imageresource①">ImageResource</a></code> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string" id="ref-for-string">string</a> from which a user agent can create a <a data-link-type="dfn" href="https://w3c.github.io/ServiceWorker/#dfn-cache-batch-operation-request" id="ref-for-dfn-cache-batch-operation-request">request</a>'s <a data-link-type="dfn" href="https://url.spec.whatwg.org/#concept-url" id="ref-for-concept-url">URL</a> to <a data-link-type="dfn" href="https://fetch.spec.whatwg.org/#concept-fetch" id="ref-for-concept-fetch">fetch</a> the image’s data.</p>
+   <p class="note" role="note"><span>Note:</span> The other members of the <a data-link-type="dfn" href="https://w3c.github.io/ServiceWorker/#dfn-cache-batch-operation-request" id="ref-for-dfn-cache-batch-operation-request①">request</a> depend on the API using <code class="idl"><a data-link-type="idl" href="#dictdef-imageresource" id="ref-for-dictdef-imageresource②">ImageResource</a></code>.</p>
    <h3 class="heading settled" data-level="2.2" id="image-resource-sizes"><span class="secno">2.2. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#dom-imageresource-sizes" id="ref-for-dom-imageresource-sizes">sizes</a></code></span><a class="self-link" href="#image-resource-sizes"></a></h3>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-imageresource-sizes" id="ref-for-dom-imageresource-sizes①">sizes</a></code> of an <code class="idl"><a data-link-type="idl" href="#dictdef-imageresource" id="ref-for-dictdef-imageresource②">ImageResource</a></code> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string" id="ref-for-string①">string</a> consisting of an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens" id="ref-for-unordered-set-of-unique-space-separated-tokens">unordered set of unique space-separated tokens</a> which are <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-case-insensitive" id="ref-for-ascii-case-insensitive">ASCII case-insensitive</a> that represent the dimensions
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-imageresource-sizes" id="ref-for-dom-imageresource-sizes①">sizes</a></code> of an <code class="idl"><a data-link-type="idl" href="#dictdef-imageresource" id="ref-for-dictdef-imageresource③">ImageResource</a></code> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string" id="ref-for-string①">string</a> consisting of an <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#unordered-set-of-unique-space-separated-tokens" id="ref-for-unordered-set-of-unique-space-separated-tokens">unordered set of unique space-separated tokens</a> which are <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-case-insensitive" id="ref-for-ascii-case-insensitive">ASCII case-insensitive</a> that represent the dimensions
 of an image. Each keyword is either an <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#ascii-case-insensitive" id="ref-for-ascii-case-insensitive①">ASCII case-insensitive</a> match for the <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string" id="ref-for-string②">string</a> "<a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/links.html#attr-link-sizes-any" id="ref-for-attr-link-sizes-any">any</a>", or a value that
 consists of two <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-non-negative-integer" id="ref-for-valid-non-negative-integer">valid non-negative integers</a> that do not have a leading U+0030 DIGIT ZERO (0) character and that are
 separated by a single U+0078 LATIN SMALL LETTER X or U+0058 LATIN CAPITAL LETTER X character. The keywords represent
-icon sizes in raw pixels (as opposed to CSS pixels). When multiple <code class="idl"><a data-link-type="idl" href="#dictdef-imageresource" id="ref-for-dictdef-imageresource③">ImageResource</a></code>s are available, a user agent MAY
+icon sizes in raw pixels (as opposed to CSS pixels). When multiple <code class="idl"><a data-link-type="idl" href="#dictdef-imageresource" id="ref-for-dictdef-imageresource④">ImageResource</a></code>s are available, a user agent MAY
 use the value to decide which icon is most suitable for a display context (and ignore any that are inappropriate).</p>
    <div class="algorithm" data-algorithm="process the sizes member">
     <p>To <dfn data-dfn-type="dfn" data-noexport id="process-the-sizes-member">process the <code class="idl"><a data-link-type="idl" href="#dom-imageresource-sizes" id="ref-for-dom-imageresource-sizes②">sizes</a></code> member<a class="self-link" href="#process-the-sizes-member"></a></dfn>, run the following steps:</p>
@@ -1570,7 +1573,7 @@ use the value to decide which icon is most suitable for a display context (and i
     </ol>
    </div>
    <h3 class="heading settled" data-level="2.3" id="image-resource-type"><span class="secno">2.3. </span><span class="content"><code class="idl"><a data-link-type="idl" href="#dom-imageresource-type" id="ref-for-dom-imageresource-type">type</a></code></span><a class="self-link" href="#image-resource-type"></a></h3>
-   <p>The <code class="idl"><a data-link-type="idl" href="#dom-imageresource-type" id="ref-for-dom-imageresource-type①">type</a></code> member of an <code class="idl"><a data-link-type="idl" href="#dictdef-imageresource" id="ref-for-dictdef-imageresource④">ImageResource</a></code> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string" id="ref-for-string③">string</a> that is a valid <a data-link-type="dfn" href="https://mimesniff.spec.whatwg.org/#mime-type" id="ref-for-mime-type">MIME type</a>. It acts as
+   <p>The <code class="idl"><a data-link-type="idl" href="#dom-imageresource-type" id="ref-for-dom-imageresource-type①">type</a></code> member of an <code class="idl"><a data-link-type="idl" href="#dictdef-imageresource" id="ref-for-dictdef-imageresource⑤">ImageResource</a></code> is a <a data-link-type="dfn" href="https://infra.spec.whatwg.org/#string" id="ref-for-string③">string</a> that is a valid <a data-link-type="dfn" href="https://mimesniff.spec.whatwg.org/#mime-type" id="ref-for-mime-type">MIME type</a>. It acts as
 a hint to the media type of the image. The purpose of this member is to allow the user agent to ignore images of media
 types it does not support.</p>
    <p>There is no default <a data-link-type="dfn" href="https://mimesniff.spec.whatwg.org/#mime-type" id="ref-for-mime-type①">MIME type</a> for image resources. However, for the purposes of <a data-link-type="dfn" href="https://html.spec.whatwg.org/multipage/semantics.html#concept-link-type-sniffing" id="ref-for-concept-link-type-sniffing">determining the type of the resource</a>, user agents must expect the resource to be an image.</p>
@@ -1804,22 +1807,28 @@ types it does not support.</p>
     <li><a href="#ref-for-mime-type">2.3. type</a> <a href="#ref-for-mime-type①">(2)</a>
    </ul>
   </aside>
-  <aside class="dfn-panel" data-for="term-for-url">
-   <a href="https://url.spec.whatwg.org/#url">https://url.spec.whatwg.org/#url</a><b>Referenced in:</b>
+  <aside class="dfn-panel" data-for="term-for-dfn-cache-batch-operation-request">
+   <a href="https://w3c.github.io/ServiceWorker/#dfn-cache-batch-operation-request">https://w3c.github.io/ServiceWorker/#dfn-cache-batch-operation-request</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-url">2.1. src</a>
+    <li><a href="#ref-for-dfn-cache-batch-operation-request">2.1. src</a> <a href="#ref-for-dfn-cache-batch-operation-request①">(2)</a>
+   </ul>
+  </aside>
+  <aside class="dfn-panel" data-for="term-for-concept-url">
+   <a href="https://url.spec.whatwg.org/#concept-url">https://url.spec.whatwg.org/#concept-url</a><b>Referenced in:</b>
+   <ul>
+    <li><a href="#ref-for-concept-url">2.1. src</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-idl-DOMString">
    <a href="https://heycam.github.io/webidl/#idl-DOMString">https://heycam.github.io/webidl/#idl-DOMString</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-idl-DOMString">2. ImageResource and its members</a> <a href="#ref-for-idl-DOMString①">(2)</a>
+    <li><a href="#ref-for-idl-DOMString">2. ImageResource and its members</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="term-for-idl-USVString">
    <a href="https://heycam.github.io/webidl/#idl-USVString">https://heycam.github.io/webidl/#idl-USVString</a><b>Referenced in:</b>
    <ul>
-    <li><a href="#ref-for-idl-USVString">2. ImageResource and its members</a>
+    <li><a href="#ref-for-idl-USVString">2. ImageResource and its members</a> <a href="#ref-for-idl-USVString①">(2)</a>
    </ul>
   </aside>
   <h3 class="no-num no-ref heading settled" id="index-defined-elsewhere"><span class="content">Terms defined by reference</span><a class="self-link" href="#index-defined-elsewhere"></a></h3>
@@ -1853,9 +1862,14 @@ types it does not support.</p>
      <li><span class="dfn-paneled" id="term-for-mime-type" style="color:initial">mime type</span>
     </ul>
    <li>
+    <a data-link-type="biblio">[service-workers-1]</a> defines the following terms:
+    <ul>
+     <li><span class="dfn-paneled" id="term-for-dfn-cache-batch-operation-request" style="color:initial">request</span>
+    </ul>
+   <li>
     <a data-link-type="biblio">[URL]</a> defines the following terms:
     <ul>
-     <li><span class="dfn-paneled" id="term-for-url" style="color:initial">URL</span>
+     <li><span class="dfn-paneled" id="term-for-concept-url" style="color:initial">url</span>
     </ul>
    <li>
     <a data-link-type="biblio">[WebIDL]</a> defines the following terms:
@@ -1877,6 +1891,8 @@ types it does not support.</p>
    <dd>Gordon P. Hemsley. <a href="https://mimesniff.spec.whatwg.org/">MIME Sniffing Standard</a>. Living Standard. URL: <a href="https://mimesniff.spec.whatwg.org/">https://mimesniff.spec.whatwg.org/</a>
    <dt id="biblio-rfc2119">[RFC2119]
    <dd>S. Bradner. <a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>. March 1997. Best Current Practice. URL: <a href="https://tools.ietf.org/html/rfc2119">https://tools.ietf.org/html/rfc2119</a>
+   <dt id="biblio-service-workers-1">[SERVICE-WORKERS-1]
+   <dd>Alex Russell; et al. <a href="https://www.w3.org/TR/service-workers-1/">Service Workers 1</a>. 2 November 2017. WD. URL: <a href="https://www.w3.org/TR/service-workers-1/">https://www.w3.org/TR/service-workers-1/</a>
    <dt id="biblio-url">[URL]
    <dd>Anne van Kesteren. <a href="https://url.spec.whatwg.org/">URL Standard</a>. Living Standard. URL: <a href="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</a>
    <dt id="biblio-webidl">[WebIDL]
@@ -1884,9 +1900,9 @@ types it does not support.</p>
   </dl>
   <h2 class="no-num no-ref heading settled" id="idl-index"><span class="content">IDL Index</span><a class="self-link" href="#idl-index"></a></h2>
 <pre class="idl highlight def"><c- b>dictionary</c-> <a href="#dictdef-imageresource"><code><c- g>ImageResource</c-></code></a> {
-  <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString①"><c- b>USVString</c-></a> <a data-type="USVString " href="#dom-imageresource-src"><code><c- g>src</c-></code></a>;
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString②"><c- b>DOMString</c-></a> <a data-type="DOMString " href="#dom-imageresource-sizes"><code><c- g>sizes</c-></code></a>;
-  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①①"><c- b>DOMString</c-></a> <a data-type="DOMString " href="#dom-imageresource-type"><code><c- g>type</c-></code></a>;  
+  <c- b>required</c-> <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString②"><c- b>USVString</c-></a> <a data-type="USVString " href="#dom-imageresource-src"><code><c- g>src</c-></code></a>;
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-DOMString" id="ref-for-idl-DOMString①"><c- b>DOMString</c-></a> <a data-type="DOMString " href="#dom-imageresource-sizes"><code><c- g>sizes</c-></code></a>;
+  <a class="idl-code" data-link-type="interface" href="https://heycam.github.io/webidl/#idl-USVString" id="ref-for-idl-USVString①①"><c- b>USVString</c-></a> <a data-type="USVString " href="#dom-imageresource-type"><code><c- g>type</c-></code></a>;  
 };
 
 </pre>
@@ -1894,9 +1910,9 @@ types it does not support.</p>
    <b><a href="#dictdef-imageresource">#dictdef-imageresource</a></b><b>Referenced in:</b>
    <ul>
     <li><a href="#ref-for-dictdef-imageresource">2. ImageResource and its members</a>
-    <li><a href="#ref-for-dictdef-imageresource①">2.1. src</a>
-    <li><a href="#ref-for-dictdef-imageresource②">2.2. sizes</a> <a href="#ref-for-dictdef-imageresource③">(2)</a>
-    <li><a href="#ref-for-dictdef-imageresource④">2.3. type</a>
+    <li><a href="#ref-for-dictdef-imageresource①">2.1. src</a> <a href="#ref-for-dictdef-imageresource②">(2)</a>
+    <li><a href="#ref-for-dictdef-imageresource③">2.2. sizes</a> <a href="#ref-for-dictdef-imageresource④">(2)</a>
+    <li><a href="#ref-for-dictdef-imageresource⑤">2.3. type</a>
    </ul>
   </aside>
   <aside class="dfn-panel" data-for="dom-imageresource-src">

@@ -2,9 +2,9 @@
 
 ## Background
 
-The `ImageResource` dictionary is used to represent an image to be used as part of a web application. The dictionary
-includes additional information about the image that allows the user agent to choose the best image to show in an
-environment when a developer provides multiple `ImageResource`s. It is currently defined in the [Manifest spec](https://www.w3.org/TR/appmanifest/#imageresource-and-its-members).
+The `ImageResource` dictionary represents an image to be used as part of a web application. The dictionary includes
+additional information about the image (besiceds the src) that allows the user agent to choose the best image to show
+ in an environment when a developer provides multiple `ImageResource`s. It is currently defined in the [Manifest spec](https://www.w3.org/TR/appmanifest/#imageresource-and-its-members).
 
 The `ImageResouce` is generic enough that it is being used in other specs as well (such as
 [Background Fetch](https://wicg.github.io/background-fetch/#dom-backgroundfetchuioptions-icons)). This explainer will
@@ -18,7 +18,7 @@ The new definition of `ImageResource` will only keep the generic members.
 dictionary ImageResource {
   required USVString src;
   DOMString sizes;
-  DOMString type;  
+  USVString type;  
 }
 ```
 
@@ -34,7 +34,7 @@ The spec will include the IDL and the algorithms to parse the fields. However, t
 * Choosing an appropriate `ImageResource`
 
   This is also application specific, where different applications operate under different constraints. Furthermore,
-  this should be a user agent decision.
+  this should ultimately be a user agent decision.
 
 ## Migration
 
@@ -49,8 +49,8 @@ to be reworded in the spec as well.
 
 ```webidl
 dictionary ManifestImageResource : ImageResource {
-  DOMString platform;
-  DOMString sizes;
+  USVString platform;
+  USVString purpose;
 }
 ```
 

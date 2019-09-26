@@ -29,7 +29,7 @@ Introduction {#intro}
 
 Web applications often accept developer-provided image resources to be displayed. This specification defines a
 generalized structure where developers can provide additional metadata about an image. The user agent can then use
-this extra information to choose an image that is best suited to display on the end-user's device or most closely
+this extra information to choose an https://github.com/w3c/manifest/issues/782#issuecomment-533363985 that is best suited to display on the end-user's device or most closely
 matches the end-user's preferences.
 
 
@@ -59,7 +59,7 @@ of an image. Each keyword is either an [=ASCII case-insensitive=] match for the 
 consists of two [=valid non-negative integers=] that do not have a leading U+0030 DIGIT ZERO (0) character and that are
 separated by a single U+0078 LATIN SMALL LETTER X or U+0058 LATIN CAPITAL LETTER X character. The keywords represent
 icon sizes in raw pixels (as opposed to CSS pixels). When multiple {{ImageResource}}s are available, a user agent MAY
-use the value to decide which icon is most suitable for a display context (and ignore any that are inappropriate).
+use the value to decide which image is most suitable for a display context (and ignore any that are inappropriate).
 
 <div algorithm>
 

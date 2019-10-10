@@ -107,6 +107,24 @@
         The <a>src</a> of an <a>ImageResource</a> is a <a>string</a> which a user agent can create a <a>Request</a> <a>URL</a>
         to <a>fetch</a> the image's data.
       </p>
+      <p>
+          The steps for <dfn>processing the <code>src</code> member of an
+          image</dfn> are given by the following algorithm. The algorithm takes
+          a <a>ImageResource</a> <var>src</var>, and a <a>URL</a>
+          <var>base URL</var>, which is the <a>URL</a> from which the
+          <var>ImageResource</var> was fetched. This algorithm will return a
+          <a>URL</a> or <code>undefined</code>.
+        </p>
+        <ol>
+          <li>Let <var>value</var> be <var>image</var>["src"].
+          </li>
+          <li>If <a>Type</a>(<var>value</var>) it not String, return
+          <code>undefined</code>.
+          </li>
+          <li>Otherwise, <a>parse</a> <var>value</var> using <var>base
+          URL</var> as the base URL and return the result.
+          </li>
+        </ol>
       <div class="note">
         The other members of the <a>request</a> depend on the API using <a>ImageResource</a>.
       </div>
@@ -162,11 +180,88 @@
         The <a>type</a> member of an <a>ImageResource</a> is a <a>string</a> that is a <a>valid MIME type</a>. It acts
         as a hint to the media type of the image. The purpose of this member is to allow the user agent to ignore
         images of media types it does not support.
-
+      </p>
+      <p>
         There is no default <a>MIME type</a> for an <a>ImageResource</a>. However, for the purposes of <a>determining
           the type of the resource</a>, user agents must expect the resource to be an image.
       </p>
+      <p>
+          The steps for <dfn>processing the <code>type</code> member of an
+          image</dfn> are given by the following algorithm. The algorithm takes
+          an <var>image</var> object as an argument, and returns either a
+          <a>string</a> or <code>undefined</code>.
+        </p>
+        <ol>
+          <li>Let <var>value</var> be <var>image</var>["<a>type</a>"].
+          </li>
+          <li>If <a>Type</a>(<var>value</var>) it not String, return
+          <code>undefined</code>.
+          </li>
+          <li>If <var>value</var> is not a <a>valid MIME type</a> or the value
+          of <var>type</var> is not a supported media format, issue a developer
+          warning and return <code>undefined</code>.
+          </li>
+          <li>Return <var>value</var>.
+          </li>
+        </ol>
     </section>
+  </section>
+  <section>
+    <h3>
+      Processing an array of image resources
+    </h3>
+    <p>
+      The steps for <dfn>processing <a>ImageResource</a> members</dfn> are
+      given by the following algorithm. The algorithm takes a
+      <a>URL</a> <var>base URL</var>, which is the URL from which the
+      <var>ImageResource</var> array was fetched and a <a>string</a> that represents
+      the <var>member name</var> of the member which contains the array of
+      <a>ImageResource</a>s. This algorithm returns an
+      Array&lt;<a>ImageResource</a>&gt;
+    </p>
+    <ol>
+      <li>Let <var>imageResources</var> be a new Array object created as if
+      by the expression [].
+      </li>
+      <li>
+        <a>For each</a> <var>entry</var> of <var>member
+        name</var>:
+      </li>
+      <li>
+        <ol>
+          <li>If <var>entry</var>["src"] is not <code>undefined</code>:
+            <ol>
+              <li>Let <var>image</var> be a new object created as if by the
+              expression ({}).
+              </li>
+              <li>Set <var>image</var>["src"] to the result of running <a>
+                processing the <code>src</code> member of an image</a>
+                given <var>entry</var> and <var>base URL</var>.
+              </li>
+              <li>Set <var>image</var>["type"] to the result of running <a>
+                processing the <code>type</code> member of an image</a>
+                given <var>entry</var> and <var>base URL</var>.
+              </li>
+              <li>Set <var>image</var>["sizes"] to the result of running
+              <a>processing the <code>sizes</code> member of an image</a>
+              given <var>entry</var> and <var>base URL</var>.
+              </li>
+              <li>If <var>purpose</var> is failure, <a data-lt=
+              "iteration-continue">continue</a>.
+              </li>
+              <li>Set <var>image</var>["purpose"] to <var>purpose</var>.
+              </li>
+              <li>
+                <a data-lt="list-append">Append</a> <var>image</var> to
+                <var>imageResources</var>
+              </li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+      <li>Return <var>imageResources</var>.
+      </li>
+    </ol>
   </section>
   <section class="appendix">
     <h3>
@@ -177,6 +272,10 @@
         <ul>
           <li>
             <dfn data-cite="URL#concept-url">URL</dfn>
+          </li>
+          <li>
+            <dfn data-cite="URL#concept-url-parser" data-lt=
+              "parse|parsing|URL parsing">URL parser</dfn>
           </li>
         </ul>
       </li>
@@ -232,6 +331,9 @@
           </li>
           <li>
             <dfn data-cite="INFRA#string">string</dfn>
+          </li>
+          <li>
+            <dfn data-cite="INFRA#iteration-continue">continue</dfn>
           </li>
           <li>
             <dfn data-cite="INFRA#list">list</dfn>

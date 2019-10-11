@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="utf-8">
-  <title>
-    Image Resource
-  </title>
-  <script src="https://www.w3.org/Tools/respec/respec-w3c" class="remove"></script>
-  <script class='remove'>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Image Resource
+    </title>
+    <script src="https://www.w3.org/Tools/respec/respec-w3c" class=
+    "remove"></script>
+    <script class='remove'>
     const respecConfig = {
       mdn: true,
       specStatus: "ED",
@@ -30,8 +30,8 @@
       wgURI: "https://www.w3.org/2019/webapps/",
       github: "https://github.com/w3c/image-resource/",
     };
-  </script>
-  <style>
+    </script>
+    <style>
     .icon-title {
       text-transform: uppercase;
       font-weight: bold;
@@ -55,119 +55,135 @@
       min-width: 188px;
       min-height: 188px;
     }
-  </style>
-</head>
-
-<body data-cite="ENCODING">
-  <section id='abstract'>
-    <p>
-      This document describes a generalized structure to be used in APIs that accept image definitions.
-    </p>
-  </section>
-  <section id="sotd">
-    <div class="warning">
+    </style>
+  </head>
+  <body data-cite="ENCODING">
+    <section id='abstract'>
       <p>
-        Implementors need to be aware that this specification is not stable. However, aspects of this specification are
-        shipping in at least one browser (see links to implementation status at the top of this document). <strong>Implementors
-          who are not taking part in the discussions will find the specification changing out from under them in
-          incompatible ways.</strong> Vendors interested in implementing this specification before it eventually
-        reaches the Candidate Recommendation phase should <a href="https://github.com/w3c/image-resource/issues">subscribe
-          to
-          the repository on GitHub</a> and take part in the discussions.
+        This document describes a generalized structure to be used in APIs that
+        accept image definitions.
       </p>
-    </div>
-  </section>
-  <section>
-    <h2>
-      Introduction
-    </h2>
-    <p>
-      Web applications often accept developer-provided image resources to be displayed. This specification defines a
-      generalized structure where developers can provide additional metadata about an image. The user agent can then
-      use this extra information to choose an an image that is best suited to display on the end-user's device or most
-      closely matches the end-user's preferences.
-    </p>
-  </section>
-  <section>
-    <h2>
-      <dfn>ImageResource</dfn> and its members
-    </h2>
-    <pre class="idl">
+    </section>
+    <section id="sotd">
+      <div class="warning">
+        <p>
+          Implementors need to be aware that this specification is not stable.
+          However, aspects of this specification are shipping in at least one
+          browser (see links to implementation status at the top of this
+          document). <strong>Implementors who are not taking part in the
+          discussions will find the specification changing out from under them
+          in incompatible ways.</strong> Vendors interested in implementing
+          this specification before it eventually reaches the Candidate
+          Recommendation phase should <a href=
+          "https://github.com/w3c/image-resource/issues">subscribe to the
+          repository on GitHub</a> and take part in the discussions.
+        </p>
+      </div>
+    </section>
+    <section>
+      <h2>
+        Introduction
+      </h2>
+      <p>
+        Web applications often accept developer-provided image resources to be
+        displayed. This specification defines a generalized structure where
+        developers can provide additional metadata about an image. The user
+        agent can then use this extra information to choose an an image that is
+        best suited to display on the end-user's device or most closely matches
+        the end-user's preferences.
+      </p>
+    </section>
+    <section>
+      <h2>
+        <dfn>ImageResource</dfn> and its members
+      </h2>
+      <pre class="idl">
         dictionary ImageResource {
           required USVString src;
           DOMString sizes;
           USVString type;
         };
       </pre>
-    <section data-dfn-for="ImageResource" data-link-for="ImageResource">
-      <h3>
-        <dfn>src</dfn> member
-      </h3>
-      <p>
-        The <a>src</a> of an <a>ImageResource</a> is a <a>string</a> which a user agent can create a <a>Request</a> <a>URL</a>
-        to <a>fetch</a> the image's data.
-      </p>
-      <div class="note">
-        The other members of the <a>request</a> depend on the API using <a>ImageResource</a>.
-      </div>
-    </section>
-    <section data-dfn-for="ImageResource" data-link-for="ImageResource">
-      <h3>
-        <dfn>sizes</dfn> member
-      </h3>
-      <p>
-        The <a>sizes</a> of an <a>ImageResource</a> is a <a>string</a> consisting of an <a>unordered set of unique
-          space-separated tokens</a> which are <a>ASCII case-insensitive</a> that represent the dimensions of an image.
-        Each keyword is either an <a>ASCII case-insensitive</a> match for the <a>string</a> "<a data-lt="any link size">any</a>",
-        or a value that consists of two <a>valid non-negative integers</a> that do not have a leading U+0030 DIGIT ZERO
-        (0) character and that are separated by a single U+0078 LATIN SMALL LETTER X or U+0058 LATIN CAPITAL LETTER X
-        character. The keywords represent icon sizes in raw pixels (as opposed to CSS pixels). When multiple <a>ImageResource</a>s
-        are available, a user agent MAY use the value to decide which image is most suitable for a display context (and
-        ignore any that are inappropriate).
-      </p>
-      <p>
-        The steps for <dfn>processing the <code>sizes</code> member of an image</dfn> are given by the following
-        algorithm. The algorithm takes an <a>ImageResource</a> <var>image</var>. This algorithm will return a set.
-      </p>
-      <ol>
-        <li>Let <var>set</var> be an empty <a>set</a>.
-        </li>
-        <li>Let <var>value</var> be <var>image.sizes</var>.
-        </li>
-        <li>If <a>Type</a>(<var>value</var>) it not String, return
+      <section data-dfn-for="ImageResource" data-link-for="ImageResource">
+        <h3>
+          <dfn>src</dfn> member
+        </h3>
+        <p>
+          The <a>src</a> of an <a>ImageResource</a> is a <a>string</a> which a
+          user agent can create a <a>Request</a> <a>URL</a> to <a>fetch</a> the
+          image's data.
+        </p>
+        <div class="note">
+          The other members of the <a>request</a> depend on the API using
+          <a>ImageResource</a>.
+        </div>
+      </section>
+      <section data-dfn-for="ImageResource" data-link-for="ImageResource">
+        <h3>
+          <dfn>sizes</dfn> member
+        </h3>
+        <p>
+          The <a>sizes</a> of an <a>ImageResource</a> is a <a>string</a>
+          consisting of an <a>unordered set of unique space-separated
+          tokens</a> which are <a>ASCII case-insensitive</a> that represent the
+          dimensions of an image. Each keyword is either an <a>ASCII
+          case-insensitive</a> match for the <a>string</a> "<a data-lt=
+          "any link size">any</a>", or a value that consists of two <a>valid
+          non-negative integers</a> that do not have a leading U+0030 DIGIT
+          ZERO (0) character and that are separated by a single U+0078 LATIN
+          SMALL LETTER X or U+0058 LATIN CAPITAL LETTER X character. The
+          keywords represent icon sizes in raw pixels (as opposed to CSS
+          pixels). When multiple <a>ImageResource</a>s are available, a user
+          agent MAY use the value to decide which image is most suitable for a
+          display context (and ignore any that are inappropriate).
+        </p>
+        <p>
+          The steps for <dfn>processing the <code>sizes</code> member of an
+          image</dfn> are given by the following algorithm. The algorithm takes
+          an <a>ImageResource</a> <var>image</var>. This algorithm will return
+          a set.
+        </p>
+        <ol>
+          <li>Let <var>set</var> be an empty <a>set</a>.
+          </li>
+          <li>Let <var>value</var> be <var>image.sizes</var>.
+          </li>
+          <li>If <a>Type</a>(<var>value</var>) it not String, return
           <code>undefined</code>.
-        </li>
-        <li>Otherwise, parse <var>value</var> as if it was a [[HTML]]
+          </li>
+          <li>Otherwise, parse <var>value</var> as if it was a [[HTML]]
           {{HTMLLinkElement/sizes}} attribute and let <a>list</a>
           <var>keywords</var> be the result.
-        </li>
-        <li>
-          <a>For each</a> <var>keyword</var> of <var>keywords</var>:
-          <ol>
-            <li>
-              <a data-lt="set-append">Append</a> <var>keyword</var>,
-              <a>lowercased</a>, to <var>set</var>.
-            </li>
-          </ol>
-        </li>
-        <li>Return <var>set</var>.
-        </li>
-      </ol>
-    </section>
-    <section data-dfn-for="ImageResource" data-link-for="ImageResource">
-      <h3>
-        <dfn>type</dfn> member
-      </h3>
-      <p>
-        The <a>type</a> member of an <a>ImageResource</a> is a <a>string</a> that is a <a>valid MIME type</a>. It acts
-        as a hint to the media type of the image. The purpose of this member is to allow the user agent to ignore
-        images of media types it does not support.
-      </p>
-      <p>
-        There is no default <a>MIME type</a> for an <a>ImageResource</a>. However, for the purposes of <a>determining
-          the type of the resource</a>, user agents must expect the resource to be an image.
-      </p>
-      <p>
+          </li>
+          <li>
+            <a>For each</a> <var>keyword</var> of <var>keywords</var>:
+            <ol>
+              <li>
+                <a data-lt="set-append">Append</a> <var>keyword</var>,
+                <a>lowercased</a>, to <var>set</var>.
+              </li>
+            </ol>
+          </li>
+          <li>Return <var>set</var>.
+          </li>
+        </ol>
+      </section>
+      <section data-dfn-for="ImageResource" data-link-for="ImageResource">
+        <h3>
+          <dfn>type</dfn> member
+        </h3>
+        <p>
+          The <a>type</a> member of an <a>ImageResource</a> is a <a>string</a>
+          that is a <a>valid MIME type</a>. It acts as a hint to the media type
+          of the image. The purpose of this member is to allow the user agent
+          to ignore images of media types it does not support.
+        </p>
+        <p>
+          There is no default <a>MIME type</a> for an <a>ImageResource</a>.
+          However, for the purposes of <a>determining the type of the
+          resource</a>, user agents must expect the resource to be an image.
+        </p>
+        <p>
           The steps for <dfn>processing the <code>type</code> member of an
           image</dfn> are given by the following algorithm. The algorithm takes
           an <var>image</var> object as an argument, and returns either a
@@ -186,180 +202,184 @@
           <li>Return <var>value</var>.
           </li>
         </ol>
+      </section>
     </section>
-  </section>
-  <section>
-    <h3>
-      Processing an array of image resources
-    </h3>
-    <p>
-      The steps for <dfn>processing <a>ImageResource</a> members</dfn> are 
-      given by the following algorithm. The algorithm takes an 
-      Array&lt;<a>ImageResource</a>&gt; <var>entries</var> and a <a>URL</a> 
-      <var>context</var>. This algorithm returns an 
-      Array&lt;<a>ImageResource</a>&gt;.
-    </p>
-    <div class="note">
-      The <a>URL</a> <var>context</var> typically represents the <a>URL</a> of
-      the document that triggered the processing of the <a>ImageResource</a>
-      (e.g., the document in which a method was called) or the <a>manifest</a>
-      containing it.
-    </div>
-    <ol>
-      <li>Let <var>imageResources</var> be a new Array object created as if
-      by the expression [].
-      </li>
-      <li>
-        <a>For each</a> <var>entry</var> of <var>entries</var>:
-      </li>
-      <li>
-        <ol>
-          <li>If <var>entry</var>["src"] is not <code>undefined</code>:
-            <ol>
-              <li>Let <var>image</var> be a new object created as if by the
-              expression ({}).
-              </li>
-              <li>Set <var>image</var>["src"] to the result of <a>parsing</a>
-                <var>entry</var>["src"] using <var>context</var> as the 
+    <section>
+      <h3>
+        Processing an array of image resources
+      </h3>
+      <p>
+        The steps for <dfn>processing <a>ImageResource</a> members</dfn> are
+        given by the following algorithm. The algorithm takes an
+        Array&lt;<a>ImageResource</a>&gt; <var>entries</var> and a <a>URL</a>
+        <var>context</var>. This algorithm returns an
+        Array&lt;<a>ImageResource</a>&gt;.
+      </p>
+      <div class="note">
+        The <a>URL</a> <var>context</var> typically represents the <a>URL</a>
+        of the document that triggered the processing of the
+        <a>ImageResource</a> (e.g., the document in which a method was called)
+        or the <a>manifest</a> containing it.
+      </div>
+      <ol>
+        <li>Let <var>imageResources</var> be a new Array object created as if
+        by the expression [].
+        </li>
+        <li>
+          <a>For each</a> <var>entry</var> of <var>entries</var>:
+        </li>
+        <li>
+          <ol>
+            <li>If <var>entry</var>["src"] is not <code>undefined</code>:
+              <ol>
+                <li>Let <var>image</var> be a new object created as if by the
+                expression ({}).
+                </li>
+                <li>Set <var>image</var>["src"] to the result of <a>parsing</a>
+                <var>entry</var>["src"] using <var>context</var> as the
                 <var>base URL</var>.
-              </li>
-              <li>Set <var>image</var>["type"] to the result of running <a>
-                processing the <code>type</code> member of an image</a>
+                </li>
+                <li>Set <var>image</var>["type"] to the result of running
+                <a>processing the <code>type</code> member of an image</a>
                 given <var>entry</var>.
-              </li>
-              <li>Set <var>image</var>["sizes"] to the result of running
-              <a>processing the <code>sizes</code> member of an image</a>
-              given <var>entry</var>.
-              </li>
-              <li>
-                <a data-lt="list-append">Append</a> <var>image</var> to
-                <var>imageResources</var>
-              </li>
-            </ol>
-          </li>
-        </ol>
-      </li>
-      <li>Return <var>imageResources</var>.
-      </li>
-    </ol>
-    <div class="note">
-      The choice of what to do with the Array&lt;<a>ImageResource</a>&gt; 
-      returned from this algorithm is left to the implementation context in which it is being used. Regardless of the implementation
-      context, however, the order of the <a>ImageResource</a> members 
-      provided MUST be the order in which they are returned. This will
-      enable each implementation context to consider the order of the 
-      <a>ImageResource</a> members provided by the author in their 
-      selection algorithm, should they so choose.
-    </div>
-  </section>
-  <section class="appendix">
-    <h3>
-      Terms defined by reference
-    </h3>
-    <ul class="index" data-sort="">
-      <li>[[URL]] defines the following terms:
-        <ul>
-          <li>
-            <dfn data-cite="URL#concept-url">URL</dfn>
-          </li>
-          <li>
-            <dfn data-cite="URL#concept-url-parser" data-lt=
+                </li>
+                <li>Set <var>image</var>["sizes"] to the result of running <a>
+                  processing the <code>sizes</code> member of an image</a>
+                  given <var>entry</var>.
+                </li>
+                <li>
+                  <a data-lt="list-append">Append</a> <var>image</var> to
+                  <var>imageResources</var>
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </li>
+        <li>Return <var>imageResources</var>.
+        </li>
+      </ol>
+      <div class="note">
+        The choice of what to do with the Array&lt;<a>ImageResource</a>&gt;
+        returned from this algorithm is left to the implementation context in
+        which it is being used. Regardless of the implementation context,
+        however, the order of the <a>ImageResource</a> members provided MUST be
+        the order in which they are returned. This will enable each
+        implementation context to consider the order of the
+        <a>ImageResource</a> members provided by the author in their selection
+        algorithm, should they so choose.
+      </div>
+    </section>
+    <section class="appendix">
+      <h3>
+        Terms defined by reference
+      </h3>
+      <ul class="index" data-sort="">
+        <li>[[URL]] defines the following terms:
+          <ul>
+            <li>
+              <dfn data-cite="URL#concept-url">URL</dfn>
+            </li>
+            <li>
+              <dfn data-cite="URL#concept-url-parser" data-lt=
               "parse|parsing|URL parsing">URL parser</dfn>
-          </li>
-        </ul>
-      </li>
-      <li>[[FETCH]] defines the following terms:
-        <ul data-sort="">
-          <li>
-            <dfn data-cite="FETCH#concept-fetch">Fetch</dfn>
-          </li>
-          <li>
-            <dfn data-cite="FETCH#concept-request">Request</dfn>
-          </li>
-        </ul>
-      </li>
-      <li>[[APPMANIFEST]] defines the following terms:
-        <ul>
-          <li>
-            <a data-cite="APPMANIFEST#manifest"><dfn>manifest</dfn></a>
-          </li>
-        </ul>
-      </li>
-      <li>[[HTML]] defines the following terms:
-        <ul>
-          <li>
-            <a data-cite="HTML#ascii-case-insensitive"><dfn>ASCII
-                case-insensitive</dfn></a>
-          </li>
-          <li>
-            <a data-cite="HTML#unordered-set-of-unique-space-separated-tokens"><dfn>unordered
-                set of unique space-separated tokens</dfn></a>
-          </li>
-          <li>
-            <a data-cite="HTML#attr-link-sizes-any"><dfn>any link
-                size</dfn></a>
-          </li>
-          <li>
-            <a data-cite="HTML#valid-non-negative-integer"><dfn>valid
-                non-negative integer</dfn></a>
-          </li>
-          <li>
-            <a data-cite="HTML#concept-link-type-sniffing"><dfn>determining
-                the type of the resource</dfn></a>
-          </li>
-        </ul>
-      </li>
-      <li>[[MIMESNIFF]] defines the following terms:
-        <ul>
-          <li>
-            <a data-cite="MIMESNIFF#mime-type"><dfn>MIME type</dfn></a>
-          </li>
-          <li>
-            <a data-cite="MIMESNIFF#valid-mime-type-string"><dfn>valid MIME type</dfn></a>
-          </li>
-        </ul>
-      </li>
-      <li>[[INFRA]] defines the following terms:
-        <ul>
-          <li>
-            <dfn data-cite="INFRA#ascii-lowercase" data-lt="lowercased">ASCII
+            </li>
+          </ul>
+        </li>
+        <li>[[FETCH]] defines the following terms:
+          <ul data-sort="">
+            <li>
+              <dfn data-cite="FETCH#concept-fetch">Fetch</dfn>
+            </li>
+            <li>
+              <dfn data-cite="FETCH#concept-request">Request</dfn>
+            </li>
+          </ul>
+        </li>
+        <li>[[APPMANIFEST]] defines the following terms:
+          <ul>
+            <li>
+              <a data-cite="APPMANIFEST#manifest"><dfn>manifest</dfn></a>
+            </li>
+          </ul>
+        </li>
+        <li>[[HTML]] defines the following terms:
+          <ul>
+            <li>
+              <a data-cite="HTML#ascii-case-insensitive"><dfn>ASCII
+              case-insensitive</dfn></a>
+            </li>
+            <li>
+              <a data-cite=
+              "HTML#unordered-set-of-unique-space-separated-tokens"><dfn>unordered
+              set of unique space-separated tokens</dfn></a>
+            </li>
+            <li>
+              <a data-cite="HTML#attr-link-sizes-any"><dfn>any link
+              size</dfn></a>
+            </li>
+            <li>
+              <a data-cite="HTML#valid-non-negative-integer"><dfn>valid
+              non-negative integer</dfn></a>
+            </li>
+            <li>
+              <a data-cite="HTML#concept-link-type-sniffing"><dfn>determining
+              the type of the resource</dfn></a>
+            </li>
+          </ul>
+        </li>
+        <li>[[MIMESNIFF]] defines the following terms:
+          <ul>
+            <li>
+              <a data-cite="MIMESNIFF#mime-type"><dfn>MIME type</dfn></a>
+            </li>
+            <li>
+              <a data-cite="MIMESNIFF#valid-mime-type-string"><dfn>valid MIME
+              type</dfn></a>
+            </li>
+          </ul>
+        </li>
+        <li>[[INFRA]] defines the following terms:
+          <ul>
+            <li>
+              <dfn data-cite="INFRA#ascii-lowercase" data-lt="lowercased">ASCII
               lowercase</dfn>
-          </li>
-          <li>
-            <dfn data-cite="INFRA#string">string</dfn>
-          </li>
-          <li>
-            <dfn data-cite="INFRA#iteration-continue">continue</dfn>
-          </li>
-          <li>
-            <dfn data-cite="INFRA#list">list</dfn>
-          </li>
-          <li>
-            <dfn data-cite="INFRA#list-iterate">for each</dfn> (for list)
-          </li>
-          <li>
-            <dfn data-cite="INFRA#list-contain">contains</dfn>
-          </li>
-          <li>
-            <dfn data-cite="INFRA#list-is-empty">is empty</dfn>
-          </li>
-          <li>
-            <dfn data-cite="INFRA#list-append" data-lt="list-append">append</dfn>
-          </li>
-          <li>
-            <dfn data-cite="INFRA#set">set</dfn>
-          </li>
-        </ul>
-      </li>
-      <li>[[ECMASCRIPT]] defines the following terms:
-        <ul>
-          <li>
-            <a data-cite="ECMASCRIPT#sec-ecmascript-data-types-and-values"><dfn>Type</dfn>(<var>x</var>)</a>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </section>
-</body>
-
+            </li>
+            <li>
+              <dfn data-cite="INFRA#string">string</dfn>
+            </li>
+            <li>
+              <dfn data-cite="INFRA#iteration-continue">continue</dfn>
+            </li>
+            <li>
+              <dfn data-cite="INFRA#list">list</dfn>
+            </li>
+            <li>
+              <dfn data-cite="INFRA#list-iterate">for each</dfn> (for list)
+            </li>
+            <li>
+              <dfn data-cite="INFRA#list-contain">contains</dfn>
+            </li>
+            <li>
+              <dfn data-cite="INFRA#list-is-empty">is empty</dfn>
+            </li>
+            <li>
+              <dfn data-cite="INFRA#list-append" data-lt=
+              "list-append">append</dfn>
+            </li>
+            <li>
+              <dfn data-cite="INFRA#set">set</dfn>
+            </li>
+          </ul>
+        </li>
+        <li>[[ECMASCRIPT]] defines the following terms:
+          <ul>
+            <li>
+              <a data-cite=
+              "ECMASCRIPT#sec-ecmascript-data-types-and-values"><dfn>Type</dfn>(<var>x</var>)</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </body>
 </html>

@@ -242,6 +242,16 @@
       <li>Return <var>imageResources</var>.
       </li>
     </ol>
+    <div class="note">
+      The choice of what to do with the Array&lt;<a>ImageResource</a>&gt; 
+      returned from this algorithm is left largely to the implementation
+      context in which it is being used. Regardless of the implementation
+      context, however, the order of the <a>ImageResource</a> members 
+      provided shoudl be the order in which they are returned. This will
+      enable each implementation context to consider the order of the 
+      <a>ImageResource</a> members provided by the author in their 
+      selection algorithm, should they so choose.
+    </div>
   </section>
   <section class="appendix">
     <h3>

@@ -199,6 +199,12 @@
       <var>context</var>. This algorithm returns an 
       Array&lt;<a>ImageResource</a>&gt;.
     </p>
+    <div class="note">
+      The <a>URL</a> <var>context</var> typically represents the <a>URL</a> of
+      the document that triggered the processing of the <a>ImageResource</a>
+      (e.g., the document in which a method was called) or the <a>manifest</a>
+      containing it.
+    </div>
     <ol>
       <li>Let <var>imageResources</var> be a new Array object created as if
       by the expression [].
@@ -260,6 +266,13 @@
           </li>
           <li>
             <dfn data-cite="FETCH#concept-request">Request</dfn>
+          </li>
+        </ul>
+      </li>
+      <li>[[APPMANIFEST]] defines the following terms:
+        <ul>
+          <li>
+            <a data-cite="APPMANIFEST#manifest"><dfn>manifest</dfn></a>
           </li>
         </ul>
       </li>

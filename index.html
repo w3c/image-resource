@@ -168,6 +168,11 @@
           agent MAY use the value to decide which image is most suitable for a
           display context (and ignore any that are inappropriate).
         </p>
+        <div class="note">
+          The <a>sizes</a> member allows for multiple space-separated size
+          values in order to accommodate image formats (such as ICO) that can
+          act as a container for multiple images of varying dimensions.
+        </div>
         <p>
           The steps for <dfn>processing the <code>sizes</code> member of an
           image</dfn> are given by the following algorithm. The algorithm takes

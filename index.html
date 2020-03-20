@@ -46,7 +46,7 @@
     <section id="abstract">
       <p>
         This document defines the concept of an "image resource" and a
-        corresponding a WebIDL {{ImageResource}} dictionary. Web APIs can used
+        corresponding a WebIDL {{ImageResource}} dictionary. Web APIs can use
         the {{ImageResource}} dictionary to represent an image resource in
         contexts where an `HTMLImageElement` is not suitable or available
         (e.g., in a Worker).
@@ -69,8 +69,8 @@
         UI, etc.). This specification defines a WebIDL dictionary that
         describes an image, and from where that image resource can be fetched
         from. The user agent can then use this extra information to choose an
-        an image that is best suited to display on the end-user's device or
-        most closely matches the end-user's preferences or environment.
+        image that is best suited to display on the end-user's device or most
+        closely matches the end-user's preferences or environment.
       </p>
     </section>
     <section>
@@ -98,7 +98,7 @@
           <dfn data-dfn-for="image resource">type</dfn>
         </dt>
         <dd>
-          An <a>image MIME type</a>.
+          An [=image MIME type=].
         </dd>
       </dl>
       <p>
@@ -122,7 +122,7 @@
         </h3>
         <p>
           The {{ImageResource/src}} of an {{ImageResource}} is a [=URL=] from
-          which a user agent can <a>fetch</a> image data.
+          which a user agent can [=fetch=] image data.
         </p>
       </section>
       <section>
@@ -142,10 +142,9 @@
         </p>
         <aside class="note">
           When multiple {{ImageResource}} dictionaries are being used by an API
-          (e.g., in a WebIDL <a>sequence</a>), the specifications should
-          indicate if the order in which the dictionaries are passed is
-          significant. As a general rule, order is significant and "last one
-          wins".
+          (e.g., in a WebIDL [=sequence=]), the specifications should indicate
+          if the order in which the dictionaries are passed is significant. As
+          a general rule, order is significant and "last one wins".
         </aside>
         <div class="example">
           The {{ImageResource/sizes}} member allows for multiple
@@ -167,14 +166,14 @@
           <dfn>type</dfn> member
         </h3>
         <p>
-          The {{ImageResource/type}} member represents a [=MIME Type=] for the
-          image resource. A user agent MAY ignore media types it does not
-          support.
+          The {{ImageResource/type}} member represents an [=image MIME Typ=]
+          for the image resource. A user agent MAY ignore media types it does
+          not support.
         </p>
         <p>
           There is no default [=MIME type=] for an {{ImageResource}}. The
           {{ImageResource/type}} is purely advisory. User agents MUST use the
-          <a>rules for sniffing images specifically</a> to determine the
+          [=rules for sniffing images specifically=] to determine the
           [=computed MIME type=] of an [=image resource=].
         </p>
       </section>
@@ -186,7 +185,7 @@
       <p>
         The steps to <dfn data-export="">process an `ImageResource` from an
         API</dfn> are given by the following algorithm. The algorithm takes a
-        {ImageResource} |input:ImageResource|. It returns an [=image
+        {{ImageResource}} |input:ImageResource|. It returns an [=image
         resource=].
       </p>
       <ol>
@@ -198,22 +197,21 @@
         </li>
         <li>Set |image|'s [=image resource/src=] to the result of [=URL
         parser|URL parsing=] |input|.{{ImageResource/src}} and |base URL|. If
-        parsing the URL fails, throw a {{TypeError}} {{DOMException}}.
+        parsing the URL fails, throw a {{TypeError}}.
         </li>
         <li>If |input|'s {{ImageResource/sizes}} member is present:
           <ol>
             <li>Set |image|'s [=image resource/sizes=] to the result of parsing
             |input|.{{ImageResource/sizes}} as if it was a [^link/sizes^]
-            attribute. If parsing fails, throw a {{TypeError}}
-            {{DOMException}}.
+            attribute. If parsing fails, throw a {{TypeError}}.
             </li>
           </ol>
         </li>
         <li>If |input|'s {{ImageResource/type}} member is present and not the
         empty string:
           <ol>
-            <li>If {{ImageResource/type}} is not a <a>valid MIME type
-            string</a>, throw a {{"TypeError"}} {{DOMException}}.
+            <li>If {{ImageResource/type}} is not an [=image MIME Type=], throw
+            a {{TypeError}}.
             </li>
             <li>Set |image|'s [=image resource/type=] to
             |input|.{{ImageResource/type}}.
@@ -275,7 +273,7 @@
         The steps for <dfn data-export="">fetching an image resource</dfn> are
         given by the following algorithm. The algorithm takes a [=image
         resource=] |image|, and an optional [=Request=] |request|. It returns a
-        <a>Response</a>.
+        [=Response=].
       </p>
       <ol>
         <li>If |request| is `undefined`:
@@ -290,8 +288,7 @@
             </li>
           </ol>
         </li>
-        <li>Perform a <a>fetch</a> using |request| and return the
-        <a>Response</a>.
+        <li>Perform a [=fetch=] using |request| and return the [=Response=].
         </li>
       </ol>
     </section>

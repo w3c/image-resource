@@ -1,59 +1,11 @@
 # Image Resource
 
-## Background
+This repository is the home of the [image-resource](https://www.w3.org/TR/image-resource/) specification being worked on by
+the [Web Platform Working Group](https://www.w3.org/WebPlatform/WG/).
 
-The `ImageResource` dictionary represents an image to be used as part of a web application. The dictionary includes
-additional information about the image (besides the `src`) that allows the user agent to choose the best image to show
- in an environment when a developer provides multiple `ImageResource`s. It is currently defined in the [Manifest spec](https://www.w3.org/TR/appmanifest/#imageresource-and-its-members).
+The specification defines the concept of an "image resource" and a corresponding WebIDL `ImageResource` dictionary. Web APIs can use the `ImageResource` dictionary to represent an image resource in contexts where an `HTMLImageElement` is not suitable or available (e.g., in a Worker).
 
-The `ImageResouce` is generic enough that it is being used in other specs as well (such as
-[Background Fetch](https://wicg.github.io/background-fetch/#dom-backgroundfetchuioptions-icons)). This explainer will
-cover how to extract `ImageResource` into its own spec as well as how to migrate specs using it to the new definitions.
+## Useful links
 
-## Web IDL
-
-The new definition of `ImageResource` will only keep the generic members.
-
-```webidl
-dictionary ImageResource {
-  required USVString src;
-  DOMString sizes;
-  USVString type;
-}
-```
-
-## Scope
-
-The spec will include the IDL and the algorithms to parse the fields. However, the spec will not include:
-
-* Fetching the image
-
-  There are application-specific fields needed to create an appropriate request, such as `client`,
-  `service-worker mode`, among others.
-
-* Choosing an appropriate `ImageResource`
-
-  This is also application-specific, where different applications operate under different constraints. Furthermore,
-  this should ultimately be a user agent decision.
-
-## Migration
-
-`ImageResource` is defined as a dictionary, and is therefore not web-exposed. Moving things around will not cause
-any interoperability issues.
-
-### Manifest
-
-The Manifest spec also defines manifest-specific fields, which wouldn't make sense in other contexts. The Manifest spec
-will define its own type by extending `ImageResource` and including the new members it needs. A few things will have
-to be reworded in the spec as well.
-
-```webidl
-dictionary ManifestImageResource : ImageResource {
-  USVString platform;
-  USVString purpose;
-}
-```
-
-### Background Fetch
-
-Background Fetch can use the new `ImageResource` directly.
+* [The image-resource specification](https://www.w3.org/TR/image-resource/)
+* [The Web Platform WG homepage](https://www.w3.org/WebPlatform/WG/)

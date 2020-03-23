@@ -3,83 +3,61 @@
   <head>
     <meta charset="utf-8">
     <title>
-      Image Resource
+      Image resource
     </title>
     <script src="https://www.w3.org/Tools/respec/respec-w3c" class=
     "remove"></script>
-    <script class='remove'>
-    const respecConfig = {
-      mdn: true,
-      specStatus: "ED",
-      shortName: "image-resource",
-      editors: [
-        {
-          name: "Aaron Gustafson",
-          company: "Microsoft Corporation",
-          companyURL: "https://microsoft.com/",
-          w3cid: 43672,
-        },
-        {
-          name: "Rayan Kanso",
-          company: "Google Inc.",
-          companyURL: "https://google.com/",
-          w3cid: '',
-        },
-      ],
-      wg: "Web Applications Working Group",
-      wgURI: "https://www.w3.org/2019/webapps/",
-      github: "https://github.com/w3c/image-resource/",
-      xref: "web-platform",
-    };
+    <script class="remove">
+      const respecConfig = {
+        mdn: true,
+        specStatus: "unofficial",
+        shortName: "image-resource",
+        editors: [
+          {
+            name: "Aaron Gustafson",
+            company: "Microsoft Corporation",
+            companyURL: "https://microsoft.com/",
+            w3cid: 43672,
+          },
+          {
+            name: "Rayan Kanso",
+            company: "Google Inc.",
+            companyURL: "https://google.com/",
+            w3cid: "",
+          },
+          {
+            name: "Marcos Càceres",
+            company: "Mozilla Corporation",
+            companyURL: "https://mozilla.org/",
+            w3cid: 39125,
+          },
+        ],
+        wg: "Web Applications Working Group",
+        wgURI: "https://www.w3.org/2019/webapps/",
+        github: "https://github.com/w3c/image-resource/",
+        xref: "web-platform",
+      };
     </script>
-    <style>
-    .icon-title {
-      text-transform: uppercase;
-      font-weight: bold;
-    }
-
-    .icons {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-
-    .icons>div {
-      text-align: left;
-      padding: 10px;
-      width: 188px;
-    }
-
-    .icons>div>img {
-      width: 188px;
-      height: 188px;
-      min-width: 188px;
-      min-height: 188px;
-    }
-    </style>
   </head>
-  <body data-cite="ENCODING">
+  <body data-cite="ENCODING MIMESNIFF">
+    <h1 id="title">
+      Image resource
+    </h1>
     <section id="abstract">
       <p>
-        This document describes a generalized structure to be used in APIs that
-        accept image definitions.
+        This document defines the concept of an "image resource" and a
+        corresponding WebIDL {{ImageResource}} dictionary. Web APIs can use
+        the {{ImageResource}} dictionary to represent an image resource in
+        contexts where an `HTMLImageElement` is not suitable or available
+        (e.g., in a Worker).
       </p>
     </section>
     <section id="sotd">
-      <div class="warning">
-        <p>
-          Implementors need to be aware that this specification is not stable.
-          However, aspects of this specification are shipping in at least one
-          browser (see links to implementation status at the top of this
-          document). <strong>Implementors who are not taking part in the
-          discussions will find the specification changing out from under them
-          in incompatible ways.</strong> Vendors interested in implementing
-          this specification before it eventually reaches the Candidate
-          Recommendation phase should <a href=
-          "https://github.com/w3c/image-resource/issues">subscribe to the
-          repository on GitHub</a> and take part in the discussions.
-        </p>
-      </div>
+      <p>
+        <strong>This specification is not stable.</strong> Implementors who are
+        not taking part in the discussions will find the specification changing
+        out from under them in incompatible ways.
+      </p>
     </section>
     <section>
       <h2>
@@ -87,365 +65,233 @@
       </h2>
       <p>
         Web applications often accept developer-provided image resources to be
-        displayed. This specification defines a generalized structure where
-        developers can provide additional metadata about an image. The user
-        agent can then use this extra information to choose an an image that is
-        best suited to display on the end-user's device or most closely matches
-        the end-user's preferences.
+        displayed outside of a HTML document (e.g., in the OS, in the browser
+        UI, etc.). This specification defines a WebIDL dictionary that
+        describes an image, and from where that image resource can be fetched
+        from. The user agent can then use this extra information to choose an
+        image that is best suited to display on the end-user's device or most
+        closely matches the end-user's preferences or environment.
       </p>
     </section>
     <section>
       <h2>
-        Infrastructure
+        Image resource
       </h2>
-      <section>
-        <h3>
-          Processed image resource
-        </h3>A <dfn>processed image resource</dfn> consists of:
-        <dl>
-          <dt>
-            <dfn data-dfn-for="processed image resource">src</dfn>
-          </dt>
-          <dd>
-            A <a>URL</a>.
-          </dd>
-          <dt>
-            <dfn data-dfn-for="processed image resource">sizes</dfn>
-          </dt>
-          <dd>
-            A <a>set</a> of <a>strings</a>.
-          </dd>
-          <dt>
-            <dfn data-dfn-for="processed image resource">type</dfn>
-          </dt>
-          <dd>
-            A <a>string</a>.
-          </dd>
-        </dl>
-      </section>
+      <p>
+        An <dfn>image resource</dfn> consists of:
+      </p>
+      <dl>
+        <dt>
+          <dfn data-dfn-for="image resource">src</dfn>
+        </dt>
+        <dd>
+          A [=URL=] from where to obtain the image data.
+        </dd>
+        <dt>
+          <dfn data-dfn-for="image resource">sizes</dfn>
+        </dt>
+        <dd>
+          A [=string=] representing the sizes of the image, expressed using the
+          same syntax as [^link^]'s [^link/sizes^] attribute.
+        </dd>
+        <dt>
+          <dfn data-dfn-for="image resource">type</dfn>
+        </dt>
+        <dd>
+          An [=image MIME type=].
+        </dd>
+      </dl>
+      <p>
+        In an API, this is represented as an {{ImageResource}} dictionary.
+      </p>
     </section>
-    <section>
+    <section data-dfn-for="ImageResource">
       <h2>
-        <dfn>ImageResource</dfn> and its members
+        <dfn>ImageResource</dfn> dictionary
       </h2>
       <pre class="idl">
         dictionary ImageResource {
           required USVString src;
           DOMString sizes;
-          USVString type;
+          DOMString type;
         };
       </pre>
-      <section data-dfn-for="ImageResource" data-link-for="ImageResource">
+      <section>
         <h3>
           <dfn>src</dfn> member
         </h3>
         <p>
-          The <a>src</a> of an <a>ImageResource</a> is a <a>string</a> which a
-          user agent can create a <a>Request</a> <a>URL</a> to <a>fetch</a> the
-          image's data.
+          The {{ImageResource/src}} of an {{ImageResource}} is a [=URL=] from
+          which a user agent can [=fetch=] image data.
         </p>
-        <div class="note">
-          The other members of the <a>request</a> depend on the API using
-          <a>ImageResource</a>.
-        </div>
       </section>
-      <section data-dfn-for="ImageResource" data-link-for="ImageResource">
+      <section>
         <h3>
           <dfn>sizes</dfn> member
         </h3>
         <p>
-          The <a>sizes</a> of an <a>ImageResource</a> is a <a>string</a>
-          consisting of an <a>unordered set of unique space-separated
-          tokens</a> which are <a>ASCII case-insensitive</a> that represent the
-          dimensions of an image. Each keyword is either an <a>ASCII
-          case-insensitive</a> match for the <a>string</a> "<a data-lt=
-          "any link size">any</a>", or a value that consists of two <a>valid
-          non-negative integers</a> that do not have a leading U+0030 DIGIT
-          ZERO (0) character and that are separated by a single U+0078 LATIN
-          SMALL LETTER X or U+0058 LATIN CAPITAL LETTER X character. The
-          keywords represent icon sizes in raw pixels (as opposed to CSS
-          pixels). When multiple <a>ImageResource</a>s are available, a user
-          agent MAY use the value to decide which image is most suitable for a
-          display context (and ignore any that are inappropriate).
+          The {{ImageResource/sizes}} member is equivalent to a [^link^]
+          element's [^link/sizes^] attribute, and is processed in the same
+          manner.
         </p>
-        <div class="note">
-          The <a>sizes</a> member allows for multiple space-separated size
-          values in order to accommodate image formats (such as ICO) that can
-          act as a container for multiple images of varying dimensions.
-        </div>
         <p>
-          The steps for <dfn>processing the <code>sizes</code> member of an
-          image</dfn> are given by the following algorithm. The algorithm takes
-          an <a>ImageResource</a> <var>image</var>. This algorithm will return
-          a set.
+          When multiple {{ImageResource}} dictionaries are available, a user
+          agent MAY use the {{ImageResource/sizes}} value to decide which image
+          is most suitable for a display context (and ignore any that are
+          inappropriate).
         </p>
-        <ol>
-          <li>Let <var>set</var> be an empty <a>set</a>.
-          </li>
-          <li>Let <var>value</var> be <var>image.sizes</var>.
-          </li>
-          <li>If <a>Type</a>(<var>value</var>) it not String, return
-          <code>undefined</code>.
-          </li>
-          <li>Otherwise, parse <var>value</var> as if it was a [[HTML]]
-          {{HTMLLinkElement/sizes}} attribute and let <a>list</a>
-          <var>keywords</var> be the result.
-          </li>
-          <li>
-            <a>For each</a> <var>keyword</var> of <var>keywords</var>:
-            <ol>
-              <li>
-                <a data-lt="set-append">Append</a> <var>keyword</var>,
-                <a>lowercased</a>, to <var>set</var>.
-              </li>
-            </ol>
-          </li>
-          <li>Return <var>set</var>.
-          </li>
-        </ol>
+        <aside class="note">
+          When multiple {{ImageResource}} dictionaries are being used by an API
+          (e.g., in a WebIDL [=sequence=]), the specifications should indicate
+          if the order in which the dictionaries are passed is significant. As
+          a general rule, order is significant and "last one wins".
+        </aside>
+        <div class="example">
+          The {{ImageResource/sizes}} member allows for multiple
+          space-separated size values in order to accommodate image formats
+          (such as ICO) that can act as a container for multiple images of
+          varying dimensions.
+          <pre class="js">
+            const image = {
+              src: "path/to/image.ico",
+              sizes: "16x16 32x32 64x64",
+              type: "image/vnd.microsoft.icon",
+            };
+            some.api.doSomething(image);
+          </pre>
+        </div>
       </section>
-      <section data-dfn-for="ImageResource" data-link-for="ImageResource">
+      <section>
         <h3>
           <dfn>type</dfn> member
         </h3>
         <p>
-          The <a>type</a> member of an <a>ImageResource</a> is a <a>string</a>
-          that is a <a>valid MIME type</a>. It acts as a hint to the media type
-          of the image. The purpose of this member is to allow the user agent
-          to ignore images of media types it does not support.
+          The {{ImageResource/type}} member represents an [=image MIME Type=]
+          for the image resource. A user agent MAY ignore media types it does
+          not support.
         </p>
         <p>
-          There is no default <a>MIME type</a> for an <a>ImageResource</a>.
-          However, for the purposes of <a>determining the type of the
-          resource</a>, user agents must expect the resource to be an image.
+          There is no default [=MIME type=] for an {{ImageResource}}. The
+          {{ImageResource/type}} is purely advisory. User agents MUST use the
+          [=rules for sniffing images specifically=] to determine the
+          [=computed MIME type=] of an [=image resource=].
         </p>
-        <p>
-          The steps for <dfn>processing the <code>type</code> member of an
-          image</dfn> are given by the following algorithm. The algorithm takes
-          an <a>ImageResource</a> <var>image</var> as an argument, and returns
-          either a <a>string</a> or <code>undefined</code>.
-        </p>
-        <ol>
-          <li>Let <var>value</var> be <var>image</var>["<a>type</a>"].
-          </li>
-          <li>If <a>Type</a>(<var>value</var>) is not String, return
-          <code>undefined</code>.
-          </li>
-          <li>If <var>value</var> is not a <a>valid MIME type</a> or
-          <var>value</var> is not a supported media format, issue a developer
-          warning and return <code>undefined</code>.
-          </li>
-          <li>Return <var>value</var>.
-          </li>
-        </ol>
       </section>
     </section>
     <section>
-      <h3>
-        Processing an array of image resources
-      </h3>
+      <h2>
+        Processing an `ImageResource` from an API
+      </h2>
       <p>
-        The steps for <dfn>processing <a>ImageResource</a> members</dfn> are
-        given by the following algorithm. The algorithm takes an
-        Array&lt;<a>ImageResource</a>&gt; <var>entries</var> and a <a>URL</a>
-        <var>context</var>. This algorithm returns a <a>list</a> of
-        <a>processed image resources</a>.
+        The steps to <dfn data-export="">process an `ImageResource` from an
+        API</dfn> are given by the following algorithm. The algorithm takes an
+        {{ImageResource}} |input:ImageResource|. It returns an [=image
+        resource=].
       </p>
-      <div class="note">
-        The <a>URL</a> <var>context</var> typically represents the <a>URL</a>
-        of the document that triggered the processing of the
-        <a>ImageResource</a> (e.g., the document in which a method was called)
-        or the <a>manifest</a> containing it.
-      </div>
       <ol>
-        <li>Let <var>imageResources</var> be a new Array object created as if
-        by the expression [].
+        <li>Let |base URL| be the [=relevant settings object=]’s [=environment
+        settings object/api base url=] from where this dictionary is being
+        used.
         </li>
-        <li>
-          <a>For each</a> <var>entry</var> of <var>entries</var>:
+        <li>Let |image| be a new [=image resource=].
+        </li>
+        <li>Set |image|'s [=image resource/src=] to the result of [=URL
+        parser|URL parsing=] |input|.{{ImageResource/src}} and |base URL|. If
+        parsing the URL fails, throw a {{TypeError}}.
+        </li>
+        <li>If |input|'s {{ImageResource/sizes}} member is present:
           <ol>
-            <li>Let <var>image</var> be a new <a>processed image resource</a>.
-            </li>
-            <li>Set <var>image</var>'s <a data-link-for=
-            "processed image resource">src</a> to the result of <a>parsing</a>
-            <var>entry</var>["src"] using <var>context</var> as the <var>base
-            URL</var>. If this fails, <a>continue</a>.
-            </li>
-            <li>Set <var>image</var>'s <a data-link-for=
-            "processed image resource">type</a> to the result of running
-            <a>processing the <code>type</code> member of an image</a> given
-            <var>entry</var>. If this is <code>undefined</code>,
-            <a>continue</a>.
-            </li>
-            <li>Set <var>image</var>'s <a data-link-for=
-            "processed image resource">sizes</a> to the result of running
-            <a>processing the <code>sizes</code> member of an image</a> given
-            <var>entry</var>. If this is <code>undefined</code>,
-            <a>continue</a>.
-            </li>
-            <li>
-              <a data-lt="list-append">Append</a> <var>image</var> to
-              <var>imageResources</var>
+            <li>Set |image|'s [=image resource/sizes=] to the result of parsing
+            |input|.{{ImageResource/sizes}} as if it was a [^link/sizes^]
+            attribute. If parsing fails, throw a {{TypeError}}.
             </li>
           </ol>
         </li>
-        <li>Return <var>imageResources</var>.
-        </li>
-      </ol>
-      <div class="note">
-        The choice of what to do with the array <var>imageResources</var>
-        returned from this algorithm is left to the implementation context in
-        which it is being used. Regardless of the implementation context,
-        however, the order of the <a>ImageResource</a> members provided MUST be
-        the order in which they are returned. This will enable each
-        implementation context to consider the order of the
-        <a>ImageResource</a> members provided by the author in their selection
-        algorithm, should they so choose.
-      </div>
-    </section>
-    <section>
-      <h3>
-        Fetching a processed image resource
-      </h3>
-      <p>
-        The steps for <dfn>fetching an image</dfn> are given by the
-        following algorithm. The algorithm takes a <a>processed image
-        resource</a> <var>image</var>, and an optional <a>Request</a>
-        <var>request</var>. It returns a <a>Response</a>.
-      </p>
-      <ol>
-        <li>If <var>request</var> is <code>undefined</code>:
+        <li>If |input|'s {{ImageResource/type}} member is present and not the
+        empty string:
           <ol>
-            <li>Set <var>request</var> to a new <a>Request</a>.
+            <li>If {{ImageResource/type}} is not an [=image MIME Type=], throw
+            a {{TypeError}}.
             </li>
-            <li>Set the following properties of <var>request</var>:
-              <ol>
-                <li>[=request/URL=] is set to <var>image</var>["src"].
-                </li>
-                <li>[=request/Destination=] is set to "image".
-                </li>
-                <li>[=request/Mode=] is set to "no-cors".
-                </li>
-              </ol>
+            <li>Set |image|'s [=image resource/type=] to
+            |input|.{{ImageResource/type}}.
             </li>
           </ol>
         </li>
-        <li>Perform a <a>fetch</a> using <var>request</var> and return the
-        <var>response</var>.
+        <li>Return |image|.
         </li>
       </ol>
     </section>
     <section>
-      <h3>
-        Terms defined by reference
-      </h3>
-      <ul class="index" data-sort="">
-        <li>[[URL]] defines the following terms:
-          <ul>
-            <li>
-              <dfn data-cite="URL#concept-url">URL</dfn>
-            </li>
-            <li>
-              <dfn data-cite="URL#concept-url-parser" data-lt=
-              "parse|parsing|URL parsing">URL parser</dfn>
-            </li>
-          </ul>
+      <h2>
+        Processing an image resource from JSON
+      </h2>
+      <p>
+        The steps to <dfn data-export="">process an image resource from
+        JSON</dfn> are given by the following algorithm. The algorithm takes a
+        JSON Object |input:Object| and a [=URL=] |base URL|. It returns an
+        [=image resource=].
+      </p>
+      <ol>
+        <li>If |input| is missing "src" property, return failure.
         </li>
-        <li>[[FETCH]] defines the following terms:
-          <ul data-sort="">
-            <li>
-              <dfn data-cite="FETCH#concept-fetch">Fetch</dfn>
-            </li>
-            <li>
-              <dfn data-cite="FETCH#concept-request">Request</dfn>
-            </li>
-          </ul>
+        <li>Let |image| be a new [=image resource=].
         </li>
-        <li>[[APPMANIFEST]] defines the following terms:
-          <ul>
-            <li>
-              <a data-cite="APPMANIFEST#manifest"><dfn>manifest</dfn></a>
-            </li>
-          </ul>
+        <li>Set |image|'s [=image resource/src=] to the result of [=URL
+        parser|URL parsing=] |object|'s [=image resource/src=] property and
+        |base URL|. If parsing the URL fails, return failure.
         </li>
-        <li>[[HTML]] defines the following terms:
-          <ul>
-            <li>
-              <a data-cite="HTML#ascii-case-insensitive"><dfn>ASCII
-              case-insensitive</dfn></a>
+        <li>If |input| has a "sizes" property and its type is a [=string=]
+        of length greater than zero:
+          <ol>
+            <li>Set |image|'s [=image resource/sizes=] to the result of parsing
+            |input|'s "sizes" property value as if it was a [^link/sizes^]
+            attribute. If parsing fails, return failure.
             </li>
-            <li>
-              <a data-cite=
-              "HTML#unordered-set-of-unique-space-separated-tokens"><dfn>unordered
-              set of unique space-separated tokens</dfn></a>
-            </li>
-            <li>
-              <a data-cite="HTML#attr-link-sizes-any"><dfn>any link
-              size</dfn></a>
-            </li>
-            <li>
-              <a data-cite="HTML#valid-non-negative-integer"><dfn>valid
-              non-negative integer</dfn></a>
-            </li>
-            <li>
-              <a data-cite="HTML#concept-link-type-sniffing"><dfn>determining
-              the type of the resource</dfn></a>
-            </li>
-          </ul>
+          </ol>
         </li>
-        <li>[[MIMESNIFF]] defines the following terms:
-          <ul>
-            <li>
-              <a data-cite="MIMESNIFF#mime-type"><dfn>MIME type</dfn></a>
+        <li>If |input| has a "type" property that is a [=string=] of length
+        greater than zero:
+          <ol>
+            <li>If |input|'s "type" property value is not a [=valid MIME type
+            string=], return failure.
             </li>
-            <li>
-              <a data-cite="MIMESNIFF#valid-mime-type-string"><dfn>valid MIME
-              type</dfn></a>
+            <li>Set |image|'s [=image resource/type=] to the value of |input|'s
+            "type" property.
             </li>
-          </ul>
+          </ol>
         </li>
-        <li>[[INFRA]] defines the following terms:
-          <ul>
-            <li>
-              <dfn data-cite="INFRA#ascii-lowercase" data-lt="lowercased">ASCII
-              lowercase</dfn>
-            </li>
-            <li>
-              <dfn data-cite="INFRA#string">string</dfn>
-            </li>
-            <li>
-              <dfn data-cite="INFRA#iteration-continue">continue</dfn>
-            </li>
-            <li>
-              <dfn data-cite="INFRA#list">list</dfn>
-            </li>
-            <li>
-              <dfn data-cite="INFRA#list-iterate">for each</dfn> (for list)
-            </li>
-            <li>
-              <dfn data-cite="INFRA#list-contain">contains</dfn>
-            </li>
-            <li>
-              <dfn data-cite="INFRA#list-is-empty">is empty</dfn>
-            </li>
-            <li>
-              <dfn data-cite="INFRA#list-append" data-lt=
-              "list-append">append</dfn>
-            </li>
-            <li>
-              <dfn data-cite="INFRA#set">set</dfn>
-            </li>
-          </ul>
+        <li>Return |image|.
         </li>
-        <li>[[ECMASCRIPT]] defines the following terms:
-          <ul>
-            <li>
-              <a data-cite=
-              "ECMASCRIPT#sec-ecmascript-data-types-and-values"><dfn>Type</dfn>(<var>x</var>)</a>
-            </li>
-          </ul>
-        </li>
-      </ul>
+      </ol>
     </section>
+    <section>
+      <h2>
+        Fetching an image resource
+      </h2>
+      <p>
+        The steps for <dfn data-export="">fetching an image resource</dfn> are
+        given by the following algorithm. The algorithm takes an [=image
+        resource=] |image|, and an optional [=Request=] |request|. It returns a
+        [=Response=].
+      </p>
+      <ol>
+        <li>If |request| is `undefined`:
+          <ol>
+            <li>Set |request| to a new [=Request=].
+            </li>
+            <li>Set [=request/URL=] to |image|'s [=image resource/src=].
+            </li>
+            <li>Set [=request/Destination=] to "image".
+            </li>
+            <li>Set [=request/Mode=] to "no-cors".
+            </li>
+          </ol>
+        </li>
+        <li>Perform a [=fetch=] using |request| and return the [=Response=].
+        </li>
+      </ol>
+    </section>
+    <section id="conformance"></section>
   </body>
 </html>

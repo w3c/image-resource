@@ -102,7 +102,7 @@
         </dd>
       </dl>
       <p>
-        In an API, this is represented as a {{ImageResource}} dictionary.
+        In an API, this is represented as an {{ImageResource}} dictionary.
       </p>
     </section>
     <section data-dfn-for="ImageResource">
@@ -166,7 +166,7 @@
           <dfn>type</dfn> member
         </h3>
         <p>
-          The {{ImageResource/type}} member represents an [=image MIME Typ=]
+          The {{ImageResource/type}} member represents an [=image MIME Type=]
           for the image resource. A user agent MAY ignore media types it does
           not support.
         </p>
@@ -184,7 +184,7 @@
       </h2>
       <p>
         The steps to <dfn data-export="">process an `ImageResource` from an
-        API</dfn> are given by the following algorithm. The algorithm takes a
+        API</dfn> are given by the following algorithm. The algorithm takes an
         {{ImageResource}} |input:ImageResource|. It returns an [=image
         resource=].
       </p>
@@ -241,7 +241,7 @@
         parser|URL parsing=] |object|'s [=image resource/src=] property and
         |base URL|. If parsing the URL fails, return failure.
         </li>
-        <li>If is |input| has a "sizes" property and its type is a [=string=]
+        <li>If |input| has a "sizes" property and its type is a [=string=]
         of length greater than zero:
           <ol>
             <li>Set |image|'s [=image resource/sizes=] to the result of parsing
@@ -271,7 +271,7 @@
       </h2>
       <p>
         The steps for <dfn data-export="">fetching an image resource</dfn> are
-        given by the following algorithm. The algorithm takes a [=image
+        given by the following algorithm. The algorithm takes an [=image
         resource=] |image|, and an optional [=Request=] |request|. It returns a
         [=Response=].
       </p>
@@ -280,11 +280,11 @@
           <ol>
             <li>Set |request| to a new [=Request=].
             </li>
-            <li>Set [=request/URL=] is set to |image|'s [=image resource/src=].
+            <li>Set [=request/URL=] to |image|'s [=image resource/src=].
             </li>
-            <li>Set [=request/Destination=] is set to "image".
+            <li>Set [=request/Destination=] to "image".
             </li>
-            <li>Set [=request/Mode=] is set to "no-cors".
+            <li>Set [=request/Mode=] to "no-cors".
             </li>
           </ol>
         </li>

@@ -203,7 +203,12 @@
           <ol>
             <li>Set |image|'s [=image resource/sizes=] to the result of parsing
             |input|.{{ImageResource/sizes}} as if it was a [^link/sizes^]
-            attribute. If parsing fails, throw a {{TypeError}}.
+            attribute of a [^link^] element whose [^link/rel^] attribute
+            contains the token `icon`. If parsing fails, throw a {{TypeError}}.
+              <div class="note"> The parsing steps are defined <a href=
+              "https://html.spec.whatwg.org/multipage/links.html#rel-icon">
+              here</a>. 
+              </div>
             </li>
           </ol>
         </li>
@@ -246,7 +251,12 @@
           <ol>
             <li>Set |image|'s [=image resource/sizes=] to the result of parsing
             |input|'s "sizes" property value as if it was a [^link/sizes^]
-            attribute. If parsing fails, return failure.
+            attribute of a [^link^] element whose [^link/rel^] attribute
+            contains the token `icon`. If parsing fails, throw a {{TypeError}}.
+              <div class="note"> The parsing steps are defined <a href=
+              "https://html.spec.whatwg.org/multipage/links.html#rel-icon">
+              here</a>. 
+              </div>
             </li>
           </ol>
         </li>

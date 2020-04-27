@@ -46,10 +46,10 @@
     <section id="abstract">
       <p>
         This document defines the concept of an "image resource" and a
-        corresponding WebIDL {{ImageResource}} dictionary. Web APIs can use
-        the {{ImageResource}} dictionary to represent an image resource in
-        contexts where an `HTMLImageElement` is not suitable or available
-        (e.g., in a Worker).
+        corresponding WebIDL {{ImageResource}} dictionary. Web APIs can use the
+        {{ImageResource}} dictionary to represent an image resource in contexts
+        where an `HTMLImageElement` is not suitable or available (e.g., in a
+        Worker).
       </p>
     </section>
     <section id="sotd">
@@ -67,10 +67,10 @@
         Web applications often accept developer-provided image resources to be
         displayed outside of a HTML document (e.g., in the OS, in the browser
         UI, etc.). This specification defines a WebIDL dictionary that
-        describes an image, and where that image resource can be fetched
-        from. The user agent can then use this extra information to choose an
-        image that is best suited to display on the end-user's device or most
-        closely matches the end-user's preferences or environment.
+        describes an image, and where that image resource can be fetched from.
+        The user agent can then use this extra information to choose an image
+        that is best suited to display on the end-user's device or most closely
+        matches the end-user's preferences or environment.
       </p>
     </section>
     <section>
@@ -202,11 +202,11 @@
         <li>If |input|'s {{ImageResource/sizes}} member is present:
           <ol>
             <li>Set |image|'s [=image resource/sizes=] to the result of [=link
-              type "icon"|parsing=] |input|.{{ImageResource/sizes}} as if it
-              was a [^link/sizes^] attribute of a [^link^] element whose
-              [^link/rel^] attribute contains the token `icon`. If parsing
-              fails, throw a {{TypeError}}.
-              </li>
+            type "icon"|parsing=] |input|.{{ImageResource/sizes}} as if it was
+            a [^link/sizes^] attribute of a [^link^] element whose [^link/rel^]
+            attribute contains the token `icon`. If parsing fails, throw a
+            {{TypeError}}.
+            </li>
           </ol>
         </li>
         <li>If |input|'s {{ImageResource/type}} member is present and not the
@@ -243,14 +243,14 @@
         parser|URL parsing=] |object|'s [=image resource/src=] property and
         |base URL|. If parsing the URL fails, return failure.
         </li>
-        <li>If |input| has a "sizes" property and its type is a [=string=]
-        of length greater than zero:
+        <li>If |input| has a "sizes" property and its type is a [=string=] of
+        length greater than zero:
           <ol>
             <li>Set |image|'s [=image resource/sizes=] to the result of [=link
-              type "icon"|parsing=] |input|.{{ImageResource/sizes}} as if it
-              was a [^link/sizes^] attribute of a [^link^] element whose
-              [^link/rel^] attribute contains the token `icon`. If parsing
-              fails, return failure.
+            type "icon"|parsing=] |input|.{{ImageResource/sizes}} as if it was
+            a [^link/sizes^] attribute of a [^link^] element whose [^link/rel^]
+            attribute contains the token `icon`. If parsing fails, return
+            failure.
             </li>
           </ol>
         </li>

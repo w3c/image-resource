@@ -49,10 +49,10 @@
     <section id="abstract">
       <p>
         This document defines the concept of an "image resource" and a
-        corresponding WebIDL {{ImageResource}} dictionary. Web APIs can use
-        the {{ImageResource}} dictionary to represent an image resource in
-        contexts where an `HTMLImageElement` is not suitable or available
-        (e.g., in a Worker).
+        corresponding WebIDL {{ImageResource}} dictionary. Web APIs can use the
+        {{ImageResource}} dictionary to represent an image resource in contexts
+        where an `HTMLImageElement` is not suitable or available (e.g., in a
+        Worker).
       </p>
     </section>
     <section id="sotd">
@@ -103,6 +103,12 @@
         <dd>
           An [=image MIME type=].
         </dd>
+        <dt>
+          <dfn data-dfn-for="image resource">description</dfn>
+        </dt>
+        <dd>
+          A [=string=] representing the accessible description of the image.
+        </dd>
       </dl>
       <p>
         In an API, this is represented as an {{ImageResource}} dictionary.
@@ -117,6 +123,7 @@
           required USVString src;
           DOMString sizes;
           DOMString type;
+          DOMString description;
         };
       </pre>
       <section>
@@ -180,6 +187,23 @@
           [=computed MIME type=] of an [=image resource=].
         </p>
       </section>
+      <section>
+        <h3>
+          <dfn>description</dfn> member
+        </h3>
+        <p>
+          The {{ImageResource/description}} of an {{ImageResource}} is a string
+          that provides an accessible description for the associated image.
+        </p>
+        <p>
+          The {{ImageResource/description}} is strongly recommended, but
+          optional as there are instances in which an {{ImageResource}}'s
+          description may be inferred from an [=external description=] in its
+          context. For example, the {{WebAppManifest/name}} can act as the
+          {{ImageResource/description}} for any member of the
+          {{WebAppManifest/icons}} array.
+        </p>
+      </section>
     </section>
     <section>
       <h2>
@@ -205,11 +229,11 @@
         <li>If |input|'s {{ImageResource/sizes}} member is present:
           <ol>
             <li>Set |image|'s [=image resource/sizes=] to the result of [=link
-              type "icon"|parsing=] |input|.{{ImageResource/sizes}} as if it
-              was a [^link/sizes^] attribute of a [^link^] element whose
-              [^link/rel^] attribute contains the token `icon`. If parsing
-              fails, throw a {{TypeError}}.
-              </li>
+            type "icon"|parsing=] |input|.{{ImageResource/sizes}} as if it was
+            a [^link/sizes^] attribute of a [^link^] element whose [^link/rel^]
+            attribute contains the token `icon`. If parsing fails, throw a
+            {{TypeError}}.
+            </li>
           </ol>
         </li>
         <li>If |input|'s {{ImageResource/type}} member is present and not the
@@ -220,6 +244,22 @@
             </li>
             <li>Set |image|'s [=image resource/type=] to
             |input|.{{ImageResource/type}}.
+            </li>
+          </ol>
+        </li>
+        <li>If |input|'s {{ImageResource/description}} member is present and
+        not the empty string:
+          <ol>
+            <li>Set |image|'s [=image resource/description=] to
+            |input|.{{ImageResource/description}}.
+            </li>
+          </ol>
+        </li>
+        <li>If |input|'s {{ImageResource/description}} member is not present
+        and an |external description| can be substituted:
+          <ol>
+            <li>Set |image|'s [=image resource/description=] to the value of
+            |external description|.
             </li>
           </ol>
         </li>
@@ -246,14 +286,14 @@
         parser|URL parsing=] |object|'s [=image resource/src=] property and
         |base URL|. If parsing the URL fails, return failure.
         </li>
-        <li>If |input| has a "sizes" property and its type is a [=string=]
-        of length greater than zero:
+        <li>If |input| has a "sizes" property and its type is a [=string=] of
+        length greater than zero:
           <ol>
             <li>Set |image|'s [=image resource/sizes=] to the result of [=link
-              type "icon"|parsing=] |input|.{{ImageResource/sizes}} as if it
-              was a [^link/sizes^] attribute of a [^link^] element whose
-              [^link/rel^] attribute contains the token `icon`. If parsing
-              fails, return failure.
+            type "icon"|parsing=] |input|.{{ImageResource/sizes}} as if it was
+            a [^link/sizes^] attribute of a [^link^] element whose [^link/rel^]
+            attribute contains the token `icon`. If parsing fails, return
+            failure.
             </li>
           </ol>
         </li>
@@ -265,6 +305,22 @@
             </li>
             <li>Set |image|'s [=image resource/type=] to the value of |input|'s
             "type" property.
+            </li>
+          </ol>
+        </li>
+        <li>If |input| has a "description" property that is a [=string=] of
+        length greater than zero:
+          <ol>
+            <li>Set |image|'s [=image resource/description=] to the value of
+            |input|'s "description" property.
+            </li>
+          </ol>
+        </li>
+        <li>If |input|'s {{ImageResource/description}} member is not present
+        and an |external description| can be substituted:
+          <ol>
+            <li>Set |image|'s [=image resource/description=] to the value of
+            |external description|.
             </li>
           </ol>
         </li>

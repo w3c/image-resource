@@ -299,10 +299,15 @@
             </li>
             <li>Set [=request/Destination=] to "image".
             </li>
-            <li>Set [=request/Mode=] to "no-cors".
+            <li>Set [=request/Client=] to the [=context object=]'s [=relevant settings object=].
             </li>
           </ol>
         </li>
+        <li>If |request|'s [=request/Client=] is null, throw a {{TypeError}}.
+        </li>
+        <aside class="note">
+          [=request/Client=] is required here so the appropriate CSP can be applied.
+        </aside>
         <li>Perform a [=fetch=] using |request| and return the [=Response=].
         </li>
       </ol>

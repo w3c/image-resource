@@ -305,12 +305,12 @@
         </li>
         <li>If |request|'s [=request/Client=] is null, throw a {{TypeError}}.
         </li>
-        <aside class="note">
-          [=request/Client=] is required here so the appropriate CSP can be applied.
-        </aside>
         <li>Perform a [=fetch=] using |request| and return the [=Response=].
         </li>
       </ol>
+      <aside class="note">
+        [=request/Client=] is required here so the appropriate CSP can be applied.
+      </aside>
     </section>
     <section id="conformance"></section>
   </body>

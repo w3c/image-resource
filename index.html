@@ -78,6 +78,17 @@
     </section>
     <section>
       <h2>
+        Privacy and security considerations
+      </h2>
+      <p>
+        [=Fetching an image resource=] can reveal the user's IP address. It is
+        RECOMMENDED that user agents fetch the chosen [=image resources=] when
+        provided by the developer, and store them for re-use if needed. This
+        limits tracking the user's location over time.
+      </p>
+    </section>
+    <section>
+      <h2>
         Image resource
       </h2>
       <p>
@@ -291,13 +302,18 @@
             </li>
             <li>Set [=request/Destination=] to "image".
             </li>
-            <li>Set [=request/Mode=] to "no-cors".
+            <li>Set [=request/Client=] to the [=context object=]'s [=relevant settings object=].
             </li>
           </ol>
+        </li>
+        <li>If |request|'s [=request/Client=] is null, throw a {{TypeError}}.
         </li>
         <li>Perform a [=fetch=] using |request| and return the [=Response=].
         </li>
       </ol>
+      <aside class="note">
+        [=request/Client=] is required here so the appropriate CSP can be applied.
+      </aside>
     </section>
     <section id="conformance"></section>
   </body>

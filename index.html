@@ -38,10 +38,7 @@
           repoURL: "w3c/image-resource/",
           branch: "master",
         },
-        xref: {
-          specs: ["accname"],
-          profile: "web-platform"
-        },
+        xref: "web-platform",
       };
     </script>
   </head>
@@ -110,7 +107,8 @@
           <dfn data-dfn-for="image resource">label</dfn>
         </dt>
         <dd>
-          A [=string=] representing the [=accessible name=] of the image.
+          A [=string=] representing the <a data-cite=
+          "accname/#dfn-accessible-name">accessible name</a> of the image.
         </dd>
       </dl>
       <p>
@@ -196,7 +194,9 @@
         </h3>
         <p>
           The {{ImageResource/label}} of an {{ImageResource}} is a [=string=]
-          that provides an [=accessible name=] for the associatedimage.
+          that provides an <a data-cite=
+          "accname/#dfn-accessible-name">accessible name</a> for the associated
+          image.
         </p>
         <p>
           You MUST provide a {{ImageResource/label}} unless the
@@ -207,12 +207,13 @@
         </p>
         <p>
           If an explicit {{ImageResource/label}} is not provided, but the
-          {{ImageResource/type}} supports providing an [=accessible name=],
-          implementors may choose to infer the {{ImageResource/label}} until
-          the {{ImageResource/src}} has been downloaded and parsed. If the
-          {{ImageResource/src}} is found to provide an [=accessible name=],
-          implementors may choose to update the {{ImageResource/label}} to
-          match that value.
+          {{ImageResource/type}} supports providing an <a data-cite=
+          "accname/#dfn-accessible-name">accessible name</a>, implementors may
+          choose to infer the {{ImageResource/label}} until the
+          {{ImageResource/src}} has been downloaded and parsed. If the
+          {{ImageResource/src}} is found to provide an <a data-cite=
+          "accname/#dfn-accessible-name">accessible name</a>, implementors may
+          choose to update the {{ImageResource/label}} to match that value.
         </p>
       </section>
     </section>

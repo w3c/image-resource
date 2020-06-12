@@ -196,9 +196,9 @@
           provides an accessible name for the associated image.
         </p>
         <p>
-          The {{ImageResource/label}} is strongly recommended as
-          there are instances in which an {{ImageResource}}'s label may be
-          inferred from an [=external label=] in its context. For example, the
+          The {{ImageResource/label}} is strongly recommended as there are
+          instances in which an {{ImageResource}}'s label may be inferred from
+          an [=external label=] in its context. For example, the
           {{WebAppManifest/name}} can act as the {{ImageResource/label}} for
           any member of the {{WebAppManifest/icons}} array.
         </p>
@@ -220,8 +220,8 @@
       <p>
         The steps to <dfn data-export="">process an `ImageResource` from an
         API</dfn> are given by the following algorithm. The algorithm takes an
-        {{ImageResource}} |input:ImageResource|. It returns an [=image
-        resource=].
+        {{ImageResource}} |input:ImageResource| and an optional [=string=]
+        |external label|. It returns an [=image resource=].
       </p>
       <ol>
         <li>Let |base URL| be the [=relevant settings object=]’s [=environment
@@ -282,8 +282,8 @@
       <p>
         The steps to <dfn data-export="">process an image resource from
         JSON</dfn> are given by the following algorithm. The algorithm takes a
-        JSON Object |input:Object| and a [=URL=] |base URL|. It returns an
-        [=image resource=].
+        JSON Object |input:Object|, a [=URL=] |base URL|, and an optional
+        [=string=] |external label|. It returns an [=image resource=].
       </p>
       <ol>
         <li>If |input| is missing "src" property, return failure.

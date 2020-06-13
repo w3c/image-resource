@@ -42,7 +42,7 @@
       };
     </script>
   </head>
-  <body data-cite="ENCODING MIMESNIFF">
+  <body data-cite="ENCODING MIMESNIFF ACCNAME">
     <h1 id="title">
       Image Resource
     </h1>
@@ -107,9 +107,7 @@
           <dfn data-dfn-for="image resource">label</dfn>
         </dt>
         <dd>
-          A [=string=] representing the <dfn><a href=
-          "https://w3c.github.io/accname/#dfn-accessible-name">accessible
-          name</a></dfn> of the image.
+          A [=string=] representing the [[[#dfn-accessible-name]]] of the image.
         </dd>
       </dl>
       <p>
@@ -195,7 +193,7 @@
         </h3>
         <p>
           The {{ImageResource/label}} of an {{ImageResource}} is a [=string=]
-          that provides an <a>accessible name</a> for the associated image.
+          that provides an [[[#dfn-accessible-name]]] for the associated image.
         </p>
         <p>
           You MUST provide a {{ImageResource/label}} unless the
@@ -206,10 +204,10 @@
         </p>
         <p>
           If an explicit {{ImageResource/label}} is not provided, but the
-          {{ImageResource/type}} supports providing an <a>accessible name</a>,
+          {{ImageResource/type}} supports providing an [[[#dfn-accessible-name]]],
           implementors may choose to infer the {{ImageResource/label}} until
           the {{ImageResource/src}} has been downloaded and parsed. If the
-          {{ImageResource/src}} is found to provide an <a>accessible name</a>,
+          {{ImageResource/src}} is found to provide an [[[#dfn-accessible-name]]],
           implementors may choose to update the {{ImageResource/label}} to
           match that value.
         </p>

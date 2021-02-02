@@ -200,8 +200,8 @@
           Authors are strongly encouraged to add a {{ImageResource/label}}
           unless the {{ImageResource}}'s label can be inferred from an
           <dfn>external label</dfn> in its context. For example, the
-          {{app manifest/name}} can act as the {{ImageResource/label}} for
-          any member of the {{app manifest/icons}} array.
+          {{WebAppManifest/name}} can act as the {{ImageResource/label}} for
+          any member of the {{WebAppManifest/icons}} array.
         </p>
         <p>
           If an explicit {{ImageResource/label}} is not provided, but the
@@ -237,11 +237,10 @@
         </li>
         <li>If |input|'s {{ImageResource/sizes}} member is present:
           <ol>
-            <li>Set |image|'s [=image resource/sizes=] to the result of [=link
-            type "icon"|parsing=] |input|.{{ImageResource/sizes}} as if it was
-            a [^link/sizes^] attribute of a [^link^] element whose [^link/rel^]
-            attribute contains the token `icon`. If parsing fails, throw a
-            {{TypeError}}.
+            <li>Set |image|'s [=image resource/sizes=] to the result of parsing
+            |input|.{{ImageResource/sizes}} as if it was a [^link/sizes^]
+            attribute of a [^link^] element whose [^link/rel^] attribute
+            contains the token `icon`. If parsing fails, throw a {{TypeError}}.
             </li>
           </ol>
         </li>
@@ -364,7 +363,7 @@
         </li>
       </ol>
     </section>
-    <section>
+    <section data-cite="SVG">
       <h2>
         Examples of graphics formats supporting embedded accessible names
       </h2>
@@ -374,7 +373,7 @@
         include:
       </p>
       <ul>
-        <li>The <a data-cite="SVG/struct.html#TitleElement">`title`</a> element in [[=SVG=]].
+        <li>The [^title^] element in [=SVG=].
         </li>
         <li>Metadata in raster images (e.g., tiff:ImageDescription,
         XMP:Description).

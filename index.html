@@ -25,9 +25,9 @@
             w3cid: 115452,
           },
           {
-            name: "Marcos Càceres",
-            company: "Mozilla Corporation",
-            companyURL: "https://mozilla.org/",
+            name: "Marcos Cáceres",
+            company: "W3C Invited Expert",
+            companyURL: "https://marcosc.com/",
             w3cid: 39125,
           },
         ],
@@ -70,10 +70,21 @@
         Web applications often accept developer-provided image resources to be
         displayed outside of a HTML document (e.g., in the OS, in the browser
         UI, etc.). This specification defines a WebIDL dictionary that
-        describes an image, and from where that image resource can be fetched
-        from. The user agent can then use this extra information to choose an
-        image that is best suited to display on the end-user's device or most
-        closely matches the end-user's preferences or environment.
+        describes an image, and where that image resource can be fetched from.
+        The user agent can then use this extra information to choose an image
+        that is best suited to display on the end-user's device or most closely
+        matches the end-user's preferences or environment.
+      </p>
+    </section>
+    <section>
+      <h2>
+        Privacy and security considerations
+      </h2>
+      <p>
+        [=Fetching an image resource=] can reveal the user's IP address. It is
+        RECOMMENDED that user agents fetch the chosen [=image resources=] when
+        provided by the developer, and store them for re-use if needed. This
+        limits tracking the user's location over time.
       </p>
     </section>
     <section>
@@ -155,7 +166,7 @@
           When multiple {{ImageResource}} dictionaries are being used by an API
           (e.g., in a WebIDL [=sequence=]), the specifications should indicate
           if the order in which the dictionaries are passed is significant. As
-          a general rule, order is significant and "last one wins".
+          a general rule, order is significant and "first match wins".
         </aside>
         <div class="example">
           The {{ImageResource/sizes}} member allows for multiple
@@ -355,13 +366,20 @@
             </li>
             <li>Set [=request/Destination=] to "image".
             </li>
-            <li>Set [=request/Mode=] to "no-cors".
+            <li>Set [=request/Client=] to the [=context object=]'s [=relevant
+            settings object=].
             </li>
           </ol>
+        </li>
+        <li>If |request|'s [=request/Client=] is null, throw a {{TypeError}}.
         </li>
         <li>Perform a [=fetch=] using |request| and return the [=Response=].
         </li>
       </ol>
+      <aside class="note">
+        [=request/Client=] is required here so the appropriate CSP can be
+        applied.
+      </aside>
     </section>
     <section data-cite="SVG">
       <h2>

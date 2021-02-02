@@ -42,7 +42,7 @@
       };
     </script>
   </head>
-  <body data-cite="ENCODING MIMESNIFF ACCNAME MANIFEST">
+  <body data-cite="ENCODING MIMESNIFF ACCNAME MANIFEST SVG">
     <h1 id="title">
       Image Resource
     </h1>
@@ -81,7 +81,8 @@
         Image resource
       </h2>
       <p>
-        An <dfn data-export="" data-dfn-for="">image resource</dfn> consists of:
+        An <dfn data-export="" data-dfn-for="">image resource</dfn> consists
+        of:
       </p>
       <dl>
         <dt>
@@ -107,7 +108,7 @@
           <dfn data-dfn-for="image resource">label</dfn>
         </dt>
         <dd>
-          A [=string=] representing the [=accessible name=] of the image.
+          A [=string=] representing the accessible name of the image.
         </dd>
       </dl>
       <p>
@@ -193,23 +194,23 @@
         </h3>
         <p>
           The {{ImageResource/label}} of an {{ImageResource}} is a [=string=]
-          that provides an [[[#dfn-accessible-name]]] for the associated image.
+          that provides an accessible name for the associated image.
         </p>
         <p>
-          Authors are strongly encouraged to add a {{ImageResource/label}} unless the
-          {{ImageResource}}'s label can be inferred from an <dfn>external
-          label</dfn> in its context. For example, the {{WebAppManifest/name}}
-          can act as the {{ImageResource/label}} for any member of the
-          {{WebAppManifest/icons}} array.
+          Authors are strongly encouraged to add a {{ImageResource/label}}
+          unless the {{ImageResource}}'s label can be inferred from an
+          <dfn>external label</dfn> in its context. For example, the
+          {{WebAppManifest/name}} can act as the {{ImageResource/label}} for
+          any member of the {{WebAppManifest/icons}} array.
         </p>
         <p>
           If an explicit {{ImageResource/label}} is not provided, but the
-          {{ImageResource/type}} supports providing an [[[#dfn-accessible-name]]],
-          implementors MAY choose to infer the {{ImageResource/label}} until
-          the {{ImageResource/src}} has been downloaded and parsed. If the
-          {{ImageResource/src}} is found to provide an [[[#dfn-accessible-name]]],
-          implementors may choose to update the {{ImageResource/label}} to
-          match that value.
+          {{ImageResource/type}} supports providing an [=embedded accessible
+          name=], implementors MAY choose to infer the {{ImageResource/label}}
+          until the {{ImageResource/src}} has been downloaded and parsed. If
+          the {{ImageResource/src}} is found to provide an [=embedded
+          accessible name=], implementors may choose to update the
+          {{ImageResource/label}} to match that value.
         </p>
       </section>
     </section>
@@ -362,6 +363,23 @@
         <li>Perform a [=fetch=] using |request| and return the [=Response=].
         </li>
       </ol>
+    </section>
+    <section>
+      <h2>
+        Examples of graphics formats supporting embedded accessible names
+      </h2>
+      <p>
+        Certain graphics formats support the inclusion of an <dfn>embedded
+        accessible name</dfn> as part of the image’s contents. Examples
+        include:
+      </p>
+      <ul>
+        <li>The {{SVG/title}} element in {{SVG}}.
+        </li>
+        <li>Metadata in raster images (e.g., tiff:ImageDescription,
+        XMP:Description).
+        </li>
+      </ul>
     </section>
     <section id="conformance"></section>
   </body>

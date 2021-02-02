@@ -9,7 +9,7 @@
     "remove"></script>
     <script class="remove">
       const respecConfig = {
-        mdn: true,
+        mdn: false,
         specStatus: "ED",
         editors: [
           {
@@ -42,7 +42,7 @@
       };
     </script>
   </head>
-  <body data-cite="ENCODING MIMESNIFF">
+  <body data-cite="ENCODING MIMESNIFF ACCNAME MANIFEST">
     <h1 id="title">
       Image Resource
     </h1>
@@ -81,7 +81,7 @@
         Image resource
       </h2>
       <p>
-        An <dfn>image resource</dfn> consists of:
+        An <dfn data-export="" data-dfn-for="">image resource</dfn> consists of:
       </p>
       <dl>
         <dt>
@@ -107,7 +107,7 @@
           <dfn data-dfn-for="image resource">label</dfn>
         </dt>
         <dd>
-          A [=string=] representing the accessible name of the image.
+          A [=string=] representing the [=accessible name=] of the image.
         </dd>
       </dl>
       <p>
@@ -192,22 +192,22 @@
           <dfn>label</dfn> member
         </h3>
         <p>
-          The {{ImageResource/label}} of an {{ImageResource}} is a string that
-          provides an accessible name for the associated image.
+          The {{ImageResource/label}} of an {{ImageResource}} is a [=string=]
+          that provides an [[[#dfn-accessible-name]]] for the associated image.
         </p>
         <p>
-          The {{ImageResource/label}} is strongly recommended, but optional as
-          there are instances in which an {{ImageResource}}'s label may be
-          inferred from an <dfn data-export="">external label</dfn> in its context. For example, the
-          {{WebAppManifest/name}} can act as the {{ImageResource/label}} for
-          any member of the {{WebAppManifest/icons}} array.
+          Authors are strongly encouraged to add a {{ImageResource/label}} unless the
+          {{ImageResource}}'s label can be inferred from an <dfn>external
+          label</dfn> in its context. For example, the {{WebAppManifest/name}}
+          can act as the {{ImageResource/label}} for any member of the
+          {{WebAppManifest/icons}} array.
         </p>
         <p>
           If an explicit {{ImageResource/label}} is not provided, but the
-          {{ImageResource/type}} supports providing an accessible name,
-          implementors may choose to infer the {{ImageResource/label}} until
+          {{ImageResource/type}} supports providing an [[[#dfn-accessible-name]]],
+          implementors MAY choose to infer the {{ImageResource/label}} until
           the {{ImageResource/src}} has been downloaded and parsed. If the
-          {{ImageResource/src}} is found to provide an accessible name,
+          {{ImageResource/src}} is found to provide an [[[#dfn-accessible-name]]],
           implementors may choose to update the {{ImageResource/label}} to
           match that value.
         </p>
@@ -264,10 +264,10 @@
           </ol>
         </li>
         <li>If |input|'s {{ImageResource/label}} member is not present and an
-        |external label| can be substituted:
+        |=external label=| can be substituted:
           <ol>
             <li>Set |image|'s [=image resource/label=] to the value of
-            |external label|.
+            |=external label=|.
             </li>
           </ol>
         </li>
@@ -325,10 +325,10 @@
           </ol>
         </li>
         <li>If |input|'s {{ImageResource/label}} member is not present and an
-        |external label| can be substituted:
+        |=external label=| can be substituted:
           <ol>
             <li>Set |image|'s [=image resource/label=] to the value of
-            |external label|.
+            [=external label=].
             </li>
           </ol>
         </li>

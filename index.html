@@ -90,7 +90,7 @@
         limits tracking the user's location over time.
       </p>
     </section>
-    <section data-cite="html">
+    <section>
       <h2>
         Image resource
       </h2>
@@ -108,7 +108,7 @@
         <dt>
           <dfn data-dfn-for="image resource">sizes</dfn>
         </dt>
-        <dd>
+        <dd data-cite="html">
           A [=string=] representing the sizes of the image, expressed using the
           same syntax as [^link^]'s [^link/sizes^] attribute.
         </dd>
@@ -228,7 +228,7 @@
         </p>
       </section>
     </section>
-    <section data-cite="html">
+    <section>
       <h2>
         Processing an `ImageResource` from an API
       </h2>
@@ -251,10 +251,11 @@
         </li>
         <li>If |input|'s {{ImageResource/sizes}} member is present:
           <ol>
-            <li>Set |image|'s [=image resource/sizes=] to the result of parsing
-            |input|.{{ImageResource/sizes}} as if it was a [^link/sizes^]
-            attribute of a [^link^] element whose [^link/rel^] attribute
-            contains the token `icon`. If parsing fails, throw a {{TypeError}}.
+            <li data-cite="html">Set |image|'s [=image resource/sizes=] to the
+            result of parsing |input|.{{ImageResource/sizes}} as if it was a
+            [^link/sizes^] attribute of a [^link^] element whose [^link/rel^]
+            attribute contains the token `icon`. If parsing fails, throw a
+            {{TypeError}}.
             </li>
           </ol>
         </li>
@@ -289,7 +290,7 @@
         </li>
       </ol>
     </section>
-    <section data-cite="html">
+    <section>
       <h2>
         Processing an image resource from JSON
       </h2>
@@ -311,10 +312,11 @@
         <li>If |input| has a "sizes" property and its type is a [=string=] of
         length greater than zero:
           <ol>
-            <li>Set |image|'s [=image resource/sizes=] to the result of parsing
-            |input|.{{ImageResource/sizes}} as if it was a [^link/sizes^]
-            attribute of a [^link^] element whose [^link/rel^] attribute
-            contains the token `icon`. If parsing fails, return failure.
+            <li data-cite="html">Set |image|'s [=image resource/sizes=] to the
+            result of parsing |input|.{{ImageResource/sizes}} as if it was a
+            [^link/sizes^] attribute of a [^link^] element whose [^link/rel^]
+            attribute contains the token `icon`. If parsing fails, return
+            failure.
             </li>
           </ol>
         </li>
@@ -383,7 +385,7 @@
         applied.
       </aside>
     </section>
-    <section data-cite="SVG">
+    <section>
       <h2>
         Examples of graphics formats supporting embedded accessible names
       </h2>
@@ -393,7 +395,7 @@
         include:
       </p>
       <ul>
-        <li>The [^title^] element in [=SVG=].
+        <li data-cite="SVG">The [^title^] element in [=SVG=].
         </li>
         <li>Metadata in raster images (e.g., tiff:ImageDescription,
         XMP:Description).

@@ -311,10 +311,11 @@
         <li>If |input| has a "sizes" property and its type is a [=string=] of
         length greater than zero:
           <ol>
-            <li>Set |image|'s [=image resource/sizes=] to the result of parsing
-            |input|.{{ImageResource/sizes}} as if it was a [^link/sizes^]
-            attribute of a [^link^] element whose [^link/rel^] attribute
-            contains the token `icon`. If parsing fails, return failure.
+            <li data-cite="html">Set |image|'s [=image resource/sizes=] to the
+            result of parsing |input|.{{ImageResource/sizes}} as if it was a
+            [^link/sizes^] attribute of a [^link^] element whose [^link/rel^]
+            attribute contains the token `icon`. If parsing fails, return
+            failure.
             </li>
           </ol>
         </li>
@@ -393,7 +394,7 @@
         include:
       </p>
       <ul>
-        <li>The [^title^] element in [=SVG=].
+        <li data-cite="svg">The [^title^] element in [=SVG=].
         </li>
         <li>Metadata in raster images (e.g., tiff:ImageDescription,
         XMP:Description).

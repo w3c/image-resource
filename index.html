@@ -9,7 +9,7 @@
     "remove"></script>
     <script class="remove">
       const respecConfig = {
-        mdn: true,
+        mdn: false,
         specStatus: "ED",
         editors: [
           {
@@ -31,14 +31,14 @@
             w3cid: 39125,
           },
         ],
-        wg: "Web Applications Working Group",
-        wgURI: "https://www.w3.org/2019/webapps/",
-        wgPatentURI: "https://www.w3.org/2004/01/pp-impl/114929/status",
         github: {
           repoURL: "w3c/image-resource/",
           branch: "master",
         },
-        xref: "web-platform",
+        xref: {
+          specs: ["appmanifest", "svg"],
+          profile: "web-platform",
+        },
       };
     </script>
   </head>
@@ -92,7 +92,8 @@
         Image resource
       </h2>
       <p>
-        An <dfn>image resource</dfn> consists of:
+        An <dfn data-export="" data-dfn-for="">image resource</dfn> consists
+        of:
       </p>
       <dl>
         <dt>
@@ -104,7 +105,7 @@
         <dt>
           <dfn data-dfn-for="image resource">sizes</dfn>
         </dt>
-        <dd>
+        <dd data-cite="html">
           A [=string=] representing the sizes of the image, expressed using the
           same syntax as [^link^]'s [^link/sizes^] attribute.
         </dd>
@@ -113,6 +114,12 @@
         </dt>
         <dd>
           An [=image MIME type=].
+        </dd>
+        <dt>
+          <dfn data-dfn-for="image resource">label</dfn>
+        </dt>
+        <dd>
+          A [=string=] representing the accessible name of the image.
         </dd>
       </dl>
       <p>
@@ -128,6 +135,7 @@
           required USVString src;
           DOMString sizes;
           DOMString type;
+          DOMString label;
         };
       </pre>
       <section>
@@ -139,7 +147,7 @@
           which a user agent can [=fetch=] image data.
         </p>
       </section>
-      <section>
+      <section data-cite="html">
         <h3>
           <dfn>sizes</dfn> member
         </h3>
@@ -191,6 +199,31 @@
           [=computed MIME type=] of an [=image resource=].
         </p>
       </section>
+      <section>
+        <h3>
+          <dfn>label</dfn> member
+        </h3>
+        <p>
+          The {{ImageResource/label}} of an {{ImageResource}} is a [=string=]
+          that provides an accessible name for the associated image.
+        </p>
+        <p>
+          Authors are strongly encouraged to add a {{ImageResource/label}}
+          unless the {{ImageResource}}'s label can be inferred from an
+          <dfn>external label</dfn> in its context. For example, the
+          {{WebAppManifest/name}} can act as the {{ImageResource/label}} for
+          any member of the {{WebAppManifest/icons}} array.
+        </p>
+        <p>
+          If an explicit {{ImageResource/label}} is not provided, but the
+          {{ImageResource/type}} supports providing an [=embedded accessible
+          name=], implementors MAY choose to infer the {{ImageResource/label}}
+          until the {{ImageResource/src}} has been downloaded and parsed. If
+          the {{ImageResource/src}} is found to provide an [=embedded
+          accessible name=], implementors may choose to update the
+          {{ImageResource/label}} to match that value.
+        </p>
+      </section>
     </section>
     <section>
       <h2>
@@ -215,9 +248,9 @@
         </li>
         <li>If |input|'s {{ImageResource/sizes}} member is present:
           <ol>
-            <li>Set |image|'s [=image resource/sizes=] to the result of [=link
-            type "icon"|parsing=] |input|.{{ImageResource/sizes}} as if it was
-            a [^link/sizes^] attribute of a [^link^] element whose [^link/rel^]
+            <li data-cite="html">Set |image|'s [=image resource/sizes=] to the
+            result of parsing |input|.{{ImageResource/sizes}} as if it was a
+            [^link/sizes^] attribute of a [^link^] element whose [^link/rel^]
             attribute contains the token `icon`. If parsing fails, throw a
             {{TypeError}}.
             </li>
@@ -231,6 +264,22 @@
             </li>
             <li>Set |image|'s [=image resource/type=] to
             |input|.{{ImageResource/type}}.
+            </li>
+          </ol>
+        </li>
+        <li>If |input|'s {{ImageResource/label}} member is present and not the
+        empty string:
+          <ol>
+            <li>Set |image|'s [=image resource/label=] to
+            |input|.{{ImageResource/label}}.
+            </li>
+          </ol>
+        </li>
+        <li>If |input|'s {{ImageResource/label}} member is not present and an
+        |=external label=| can be substituted:
+          <ol>
+            <li>Set |image|'s [=image resource/label=] to the value of
+            |=external label=|.
             </li>
           </ol>
         </li>
@@ -260,9 +309,9 @@
         <li>If |input| has a "sizes" property and its type is a [=string=] of
         length greater than zero:
           <ol>
-            <li>Set |image|'s [=image resource/sizes=] to the result of [=link
-            type "icon"|parsing=] |input|.{{ImageResource/sizes}} as if it was
-            a [^link/sizes^] attribute of a [^link^] element whose [^link/rel^]
+            <li data-cite="html">Set |image|'s [=image resource/sizes=] to the
+            result of parsing |input|.{{ImageResource/sizes}} as if it was a
+            [^link/sizes^] attribute of a [^link^] element whose [^link/rel^]
             attribute contains the token `icon`. If parsing fails, return
             failure.
             </li>
@@ -276,6 +325,22 @@
             </li>
             <li>Set |image|'s [=image resource/type=] to the value of |input|'s
             "type" property.
+            </li>
+          </ol>
+        </li>
+        <li>If |input| has a "label" property that is a [=string=] of length
+        greater than zero:
+          <ol>
+            <li>Set |image|'s [=image resource/label=] to the value of
+            |input|'s "label" property.
+            </li>
+          </ol>
+        </li>
+        <li>If |input|'s {{ImageResource/label}} member is not present and an
+        |=external label=| can be substituted:
+          <ol>
+            <li>Set |image|'s [=image resource/label=] to the value of
+            [=external label=].
             </li>
           </ol>
         </li>
@@ -316,6 +381,23 @@
         [=request/Client=] is required here so the appropriate CSP can be
         applied.
       </aside>
+    </section>
+    <section>
+      <h2>
+        Examples of graphics formats supporting embedded accessible names
+      </h2>
+      <p>
+        Certain graphics formats support the inclusion of an <dfn>embedded
+        accessible name</dfn> as part of the image’s contents. Examples
+        include:
+      </p>
+      <ul>
+        <li data-cite="SVG">The [^title^] element in [=SVG=].
+        </li>
+        <li>Metadata in raster images (e.g., tiff:ImageDescription,
+        XMP:Description).
+        </li>
+      </ul>
     </section>
     <section id="conformance"></section>
   </body>

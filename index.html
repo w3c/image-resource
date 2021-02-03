@@ -90,7 +90,7 @@
         limits tracking the user's location over time.
       </p>
     </section>
-    <section>
+    <section data-cite="html">
       <h2>
         Image resource
       </h2>
@@ -108,7 +108,7 @@
         <dt>
           <dfn data-dfn-for="image resource">sizes</dfn>
         </dt>
-        <dd data-cite="html">
+        <dd>
           A [=string=] representing the sizes of the image, expressed using the
           same syntax as [^link^]'s [^link/sizes^] attribute.
         </dd>
@@ -150,7 +150,7 @@
           which a user agent can [=fetch=] image data.
         </p>
       </section>
-      <section>
+      <section data-cite="html">
         <h3>
           <dfn>sizes</dfn> member
         </h3>
@@ -228,7 +228,7 @@
         </p>
       </section>
     </section>
-    <section>
+    <section data-cite="html">
       <h2>
         Processing an `ImageResource` from an API
       </h2>
@@ -289,7 +289,7 @@
         </li>
       </ol>
     </section>
-    <section>
+    <section data-cite="html">
       <h2>
         Processing an image resource from JSON
       </h2>
@@ -311,11 +311,10 @@
         <li>If |input| has a "sizes" property and its type is a [=string=] of
         length greater than zero:
           <ol>
-            <li data-cite="html">Set |image|'s [=image resource/sizes=] to the
-            result of parsing |input|.{{ImageResource/sizes}} as if it was a
-            [^link/sizes^] attribute of a [^link^] element whose [^link/rel^]
-            attribute contains the token `icon`. If parsing fails, return
-            failure.
+            <li>Set |image|'s [=image resource/sizes=] to the result of parsing
+            |input|.{{ImageResource/sizes}} as if it was a [^link/sizes^]
+            attribute of a [^link^] element whose [^link/rel^] attribute
+            contains the token `icon`. If parsing fails, return failure.
             </li>
           </ol>
         </li>
@@ -394,6 +393,7 @@
         include:
       </p>
       <ul>
+        <li>The [^title^] element in [=SVG=].
         </li>
         <li>Metadata in raster images (e.g., tiff:ImageDescription,
         XMP:Description).

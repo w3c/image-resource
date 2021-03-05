@@ -35,14 +35,11 @@
           repoURL: "w3c/image-resource/",
           branch: "main",
         },
-        xref: {
-          specs: ["appmanifest", "svg"],
-          profile: "web-platform",
-        },
+        xref: "web-platform",
       };
     </script>
   </head>
-  <body data-cite="ENCODING MIMESNIFF">
+  <body data-cite="ENCODING MIMESNIFF APPMANIFEST SVG">
     <h1 id="title">
       Image Resource
     </h1>
@@ -56,7 +53,7 @@
       </p>
     </section>
     <section id="sotd">
-      <p>
+      <p class="warning">
         <strong>This specification is not stable.</strong> Implementors who are
         not taking part in the discussions will find the specification changing
         out from under them in incompatible ways.
@@ -92,8 +89,7 @@
         Image resource
       </h2>
       <p>
-        An <dfn data-export="" data-dfn-for="">image resource</dfn> consists
-        of:
+        An <dfn data-export="">image resource</dfn> consists of:
       </p>
       <dl>
         <dt>
@@ -123,7 +119,11 @@
         </dd>
       </dl>
       <p>
-        In an API, this is represented as an {{ImageResource}} dictionary.
+        In an API, an [=image resource=] is represented as an {{ImageResource}}
+        dictionary.
+      </p>
+      <p>
+        In [[JSON]], [=image resource=] is represented as an object.
       </p>
     </section>
     <section data-dfn-for="ImageResource">
@@ -292,55 +292,59 @@
         Processing an image resource from JSON
       </h2>
       <p>
-        The steps to <dfn data-export="">process an image resource from
-        JSON</dfn> are given by the following algorithm. The algorithm takes a
-        JSON Object |input:Object| and a [=URL=] |base URL|. It returns an
-        [=image resource=].
+        To <dfn data-export="">process an image resource from JSON</dfn>, given
+        a JSON Object |input:object| and a [=URL=] |base:URL|. It returns an
+        [=ordered map=].
       </p>
       <ol>
-        <li>If |input| is missing "src" property, return failure.
+        <li>If |input| is not of type [=object=], return failure.
         </li>
-        <li>Let |image| be a new [=image resource=].
+        <li>If |input|["src"] is not of type [=string=], return failure.
         </li>
-        <li>Set |image|'s [=image resource/src=] to the result of [=URL
-        parser|URL parsing=] |object|'s [=image resource/src=] property and
-        |base URL|. If parsing the URL fails, return failure.
+        <li>Let |src:URL| be the result of [=URL parser|parsing=]
+        |input|["src"] with |base| as the base URL.
         </li>
-        <li>If |input| has a "sizes" property and its type is a [=string=] of
-        length greater than zero:
-          <ol>
-            <li data-cite="html">Set |image|'s [=image resource/sizes=] to the
-            result of parsing |input|.{{ImageResource/sizes}} as if it was a
-            [^link/sizes^] attribute of a [^link^] element whose [^link/rel^]
-            attribute contains the token `icon`. If parsing fails, return
-            failure.
-            </li>
-          </ol>
+        <li>If |src| is failure, return failure.
         </li>
-        <li>If |input| has a "type" property that is a [=string=] of length
+        <li>Let |image| be an new [=ordered map=].
+        </li>
+        <li>Set |image|["src"] to |src|.
+        </li>
+        <li>If type of |input|["sizes"] is a [=string=], and its length is
         greater than zero:
           <ol>
-            <li>If |input|'s "type" property value is not a [=valid MIME type
-            string=], return failure.
+            <li>Set |sizes:string| to the result of parsing |input|["sizes"] as
+            if it was a [^link/sizes^] attribute of a [^link^] element whose
+            [^link/rel^] attribute contains the token `icon`.
             </li>
-            <li>Set |image|'s [=image resource/type=] to the value of |input|'s
-            "type" property.
+            <li>If |sizes| is failure, return failure.
             </li>
-          </ol>
-        </li>
-        <li>If |input| has a "label" property that is a [=string=] of length
-        greater than zero:
-          <ol>
-            <li>Set |image|'s [=image resource/label=] to the value of
-            |input|'s "label" property.
+            <li>Set |image|["sizes"] to |sizes|.
             </li>
           </ol>
         </li>
-        <li>If |input|'s {{ImageResource/label}} member is not present and an
-        |=external label=| can be substituted:
+        <li>If |input|["type"] is a [=string=], and it has a length greater
+        than zero:
           <ol>
-            <li>Set |image|'s [=image resource/label=] to the value of
-            [=external label=].
+            <li>Let |mime| be the result of [=parse a mime type|parsing=]
+            |input|["type"].
+            </li>
+            <li>If |mime| is failure, return failure.
+            </li>
+            <li>Set |image|["type"] to the [=essence=] of |mine|.
+            </li>
+          </ol>
+        </li>
+        <li>If |input|["label"] is a [=string=], and its length is greater than
+        zero:
+          <ol>
+            <li>Set |image|["label"] to |input|["label"].
+            </li>
+          </ol>
+        </li>
+        <li>Otherwise, if an |=external label=| is available:
+          <ol>
+            <li>Set |image|["label"] to [=external label=].
             </li>
           </ol>
         </li>

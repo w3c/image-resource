@@ -39,7 +39,7 @@
       };
     </script>
   </head>
-  <body data-cite="ENCODING MIMESNIFF APPMANIFEST SVG">
+  <body data-cite="ENCODING MIMESNIFF APPMANIFEST">
     <h1 id="title">
       Image Resource
     </h1>
@@ -101,7 +101,7 @@
         <dt>
           <dfn data-dfn-for="image resource">sizes</dfn>
         </dt>
-        <dd data-cite="html">
+        <dd>
           An optional [=string=] representing the sizes of the image, expressed
           using the same syntax as [^link^]'s [^link/sizes^] attribute.
         </dd>
@@ -331,7 +331,7 @@
             </li>
             <li>If |mime| is failure, return failure.
             </li>
-            <li>Set |image|["type"] to the [=essence=] of |mime|.
+            <li>Set |image|["type"] to the [=MIME type/essence=] of |mime|.
             </li>
           </ol>
         </li>

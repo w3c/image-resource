@@ -209,20 +209,27 @@
           that provides an accessible name for the associated image.
         </p>
         <p>
-          Authors are strongly encouraged to add a {{ImageResource/label}}
-          unless the {{ImageResource}}'s label can be inferred from an
-          <dfn>external label</dfn> in its context. For example, the
-          [=manifest/`name`=] can act as the {{ImageResource/label}} for any
-          member of the [=manifest/`icons`=] array.
+          Implementors MUST [=calculate an accessible name=] for each
+          {{ImageResource}}.
         </p>
         <p>
-          If an explicit {{ImageResource/label}} is not provided, but the
-          {{ImageResource/type}} supports providing an [=embedded accessible
-          name=], implementors MAY choose to infer the {{ImageResource/label}}
-          until the {{ImageResource/src}} has been downloaded and parsed. If
-          the {{ImageResource/src}} is found to provide an [=embedded
-          accessible name=], implementors may choose to update the
-          {{ImageResource/label}} to match that value.
+          Authors are strongly encouraged to add a {{ImageResource/label}}
+          unless the {{ImageResource}}'s label can be inferred from an
+          <dfn>external label</dfn> in its context. For example, the context of
+          the [=manifest=], the [=manifest/`name`=] (or
+          [=manifest/`short_name`=]) provides an [=external label=] for all members of
+          the [=manifest/`icons`=] array that don’t have an explicit
+          {{ImageResource/label}} defined.
+        </p>
+        <p>
+          If neither an explicit {{ImageResource/label}} nor an [=external
+          label=] is provided, but the {{ImageResource/type}} supports
+          providing an [=embedded accessible name=], implementors MAY choose to
+          defer assigning the {{ImageResource/label}} until the
+          {{ImageResource/src}} has been downloaded and parsed. If the
+          {{ImageResource/src}} is found to provide an [=embedded accessible
+          name=], implementors MUST update the {{ImageResource/label}} to match
+          that value.
         </p>
       </section>
     </section>
@@ -268,21 +275,8 @@
             </li>
           </ol>
         </li>
-        <li>If |input|'s {{ImageResource/label}} member is present and not the
-        empty string:
-          <ol>
-            <li>Set |image|'s [=image resource/label=] to
-            |input|.{{ImageResource/label}}.
-            </li>
-          </ol>
-        </li>
-        <li>If |input|'s {{ImageResource/label}} member is not present and an
-        |=external label=| can be substituted:
-          <ol>
-            <li>Set |image|'s [=image resource/label=] to the value of
-            |=external label=|.
-            </li>
-          </ol>
+        <li>Set |image|'s [=image resource/label=] to the result of
+        [=calculating an accessible name=].
         </li>
         <li>Return |image|.
         </li>
@@ -336,18 +330,8 @@
             </li>
           </ol>
         </li>
-        <li>If |input|["label"] is a [=string=], and its length is greater than
-        zero:
-          <ol>
-            <li>Set |image|["label"] to |input|["label"].
-            </li>
-          </ol>
-        </li>
-        <li>Otherwise, if an |=external label=| is available:
-          <ol>
-            <li>Set |image|["label"] to [=external label=].
-            </li>
-          </ol>
+        <li>Set |image|["label"] to the result of [=calculating an accessible
+        name=].
         </li>
         <li>Return |image|.
         </li>
@@ -385,6 +369,49 @@
       <aside class="note">
         [=request/Client=] is required here so the appropriate CSP can be
         applied.
+      </aside>
+    </section>
+    <section>
+      <h2>
+        Calculating an accessible name
+      </h2>
+      <p>
+        The steps for <dfn data-lt="calculate an accessible name">calculating an
+        accessible name</dfn> are given by the following algorithm. The
+        algorithm takes an [=image resource=] |input| and an optional
+        [=Response=] |image| which is the result of [=fetching an image
+        resource=]. It returns a [=string=].
+      </p>
+      <ol>
+        <li>If |input|["label"] is a [=string=]:
+          <ol>
+            <li>Return |input|["label"].
+            </li>
+          </ol>
+        </li>
+        <li>Otherwise if an [=external label=] can be substituted:
+          <ol>
+            <li>Return the relevant [=external label=].
+            </li>
+          </ol>
+        </li>
+        <li>Otherwise if |image| provides an [=embedded accessible name=]:
+          <ol>
+            <li>Return the [=embedded accessible name=].
+            </li>
+          </ol>
+        </li>
+        <li>Otherwise:
+          <ol>
+            <li>Return an empty [=string=] ("").
+            </li>
+          </ol>
+        </li>
+      </ol>
+      <aside class="note">
+        Implementors may delay [=fetching an image resource=] in order to
+        obtain its [=embedded accessible name=] until they know the [=image
+        resource=] will be used.
       </aside>
     </section>
     <section>

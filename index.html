@@ -379,30 +379,10 @@
         The steps to <dfn data-lt="">calculate the accessible name</dfn> for an [=image resource=] |resource| are as follows. It returns a [=string=].
       </p>
       <ol>
-        <li>If |input|["label"] is a [=string=]:
-          <ol>
-            <li>Return |input|["label"].
-            </li>
-          </ol>
-        </li>
-        <li>Otherwise if an [=external label=] can be substituted:
-          <ol>
-            <li>Return the relevant [=external label=].
-            </li>
-          </ol>
-        </li>
-        <li>Otherwise if |image| provides an [=embedded accessible name=]:
-          <ol>
-            <li>Return the [=embedded accessible name=].
-            </li>
-          </ol>
-        </li>
-        <li>Otherwise:
-          <ol>
-            <li>Return an empty [=string=] ("").
-            </li>
-          </ol>
-        </li>
+        <li>If |resource|["label"] is a [=string=], return |input|["label"].</li>
+        <li>Otherwise, if an [=external label=] can be substituted, return the relevant [=external label=].</li>
+        <li>Otherwise, if |image| provides an [=embedded accessible name=], return the [=embedded accessible name=].</li>
+         <li>Return "".</li>
       </ol>
       <aside class="note">
         Implementors may delay [=fetching an image resource=] in order to

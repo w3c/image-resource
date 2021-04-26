@@ -206,7 +206,7 @@
         </h3>
         <p>
           The {{ImageResource/label}} of an {{ImageResource}} is a [=string=]
-          that provides the accessible name for the associated image.
+          that provides the [=accessible name=] for the associated image.
         </p>
         <p>
           Implementors MUST [=derive the accessible name=] for every
@@ -214,11 +214,11 @@
         </p>
         <p>
           Authors are strongly encouraged to add a {{ImageResource/label}}
-          unless the {{ImageResource}}’s accessible name can be inferred from an
-          <dfn>external label</dfn> in its context. For example, in the context of
-          a [=manifest=], the [=manifest/`name`=] (or
-          [=manifest/`short_name`=]) provides an [=external label=] for all members of
-          the [=manifest/`icons`=] array that don’t have a 
+          unless the {{ImageResource}}’s accessible name can be inferred from
+          an <dfn>external label</dfn> in its context. For example, in the
+          context of a [=manifest=], the [=manifest/`name`=] (or
+          [=manifest/`short_name`=]) provides an [=external label=] for all
+          members of the [=manifest/`icons`=] array that don’t have a
           {{ImageResource/label}} defined.
         </p>
         <p>
@@ -275,8 +275,8 @@
             </li>
           </ol>
         </li>
-        <li>Set |image|'s [=image resource/label=] to the result of
-        [=deriving the accessible name=].
+        <li>Set |image|'s [=image resource/label=] to the result of [=deriving
+        the accessible name=].
         </li>
         <li>Return |image|.
         </li>
@@ -376,13 +376,21 @@
         Deriving the accessible name
       </h2>
       <p>
-        The steps to <dfn data-lt="deriving the accessible name">derive the accessible name</dfn> for an [=image resource=] |resource| are as follows. It returns a [=string=].
+        The steps to <dfn data-lt="deriving the accessible name">derive the
+        accessible name</dfn> for an [=image resource=] |resource| are as
+        follows. It returns a [=string=].
       </p>
       <ol>
-        <li>If |resource|["label"] is a [=string=], return |input|["label"].</li>
-        <li>Otherwise, if |image| provides an [=embedded accessible name=], return the [=embedded accessible name=].</li>
-        <li>Otherwise, if an [=external label=] can be substituted, return the relevant [=external label=].</li>
-        <li>Return "".</li>
+        <li>If |resource|["label"] is a [=string=], return |input|["label"].
+        </li>
+        <li>Otherwise, if |image| provides an [=embedded accessible name=],
+        return the [=embedded accessible name=].
+        </li>
+        <li>Otherwise, if an [=external label=] can be substituted, return the
+        relevant [=external label=].
+        </li>
+        <li>Return "".
+        </li>
       </ol>
     </section>
     <section>

@@ -369,6 +369,8 @@
             <li>Set [=request/Client=] to the context object's [=relevant
             settings object=].
             </li>
+            <li>Set [=request/Mode=] to "[=cors=]".
+            </li>
           </ol>
         </li>
         <li>If |request|'s [=request/Client=] is null, throw a {{TypeError}}.
@@ -378,7 +380,9 @@
       </ol>
       <aside class="note">
         [=request/Client=] is required here so the appropriate CSP can be
-        applied.
+        applied. [=request/Mode=] is set to "[=cors=]" so that cross-origin
+        servers must explicitly opt-in to having their resources used as image
+        resources.
       </aside>
     </section>
     <section>

@@ -369,11 +369,11 @@
             <li>Set [=request/Client=] to the context object's [=relevant
             settings object=].
             </li>
-            <li>Set [=request/Mode=] to "[=cors=]".
-            </li>
           </ol>
         </li>
         <li>If |request|'s [=request/Client=] is null, throw a {{TypeError}}.
+        </li>
+        <li>Set |request|'s [=request/Mode=] to "[=cors=]".
         </li>
         <li>Perform a [=fetch=] using |request| and return the [=Response=].
         </li>

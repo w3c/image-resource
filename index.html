@@ -355,10 +355,13 @@
       <p>
         The steps for <dfn data-export="">fetching an image resource</dfn> are
         given by the following algorithm. The algorithm takes an [=image
-        resource=] |image|, and an optional [=Request=] |request|. It returns a
+        resource=] |image|, an optional [=Request=] |request|, and an optional
+        [=request/Mode=] |mode| (default "`cors`"). It returns a
         [=Response=].
       </p>
       <ol>
+        <li>[=Assert=]: |mode| is "`cors`" or "`same-origin`".
+        </li>
         <li>If |request| is `undefined`:
           <ol>
             <li>Set |request| to a new [=Request=].
@@ -372,14 +375,18 @@
             </li>
           </ol>
         </li>
-        <li>If |request|'s [=request/Client=] is null, throw a {{TypeError}}.
+        <li>[=Assert=]: |request|'s [=request/Client=] is not null.
+        </li>
+        <li>Set |request|'s [=request/Mode=] to |mode|.
         </li>
         <li>Perform a [=fetch=] using |request| and return the [=Response=].
         </li>
       </ol>
       <aside class="note">
         [=request/Client=] is required here so the appropriate CSP can be
-        applied.
+        applied. [=request/Mode=] is set to "`cors`" so that cross-origin
+        servers must explicitly opt-in to having their resources used as image
+        resources.
       </aside>
     </section>
     <section>
